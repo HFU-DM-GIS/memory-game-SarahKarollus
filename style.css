@@ -1,0 +1,42 @@
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+}
+.card span {
+  display: none;
+}
+
+span.flipped {
+  display: block;
+}
+
+.selected {
+  border: black solid 5px;
+}
+
+.correct {
+  background-color: green;
+}
+
+.incorrect {
+  background-color: red;
+}
