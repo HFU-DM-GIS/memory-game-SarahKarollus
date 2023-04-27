@@ -1,9 +1,27 @@
 const cards = document.querySelectorAll(".card");
 const resetButton = document.querySelector("#reset");
+/* const grid = document.querySelector(".grid"); */
+
 let flippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 
+/*for(let y = 0; y<2; y++) {
+for(let i=1; i<=4; i++) {
+  //DIV
+let card = document.createElement("div");
+card.setAttribute("class", "card");
+card.setAttribute("data-card", i);
+
+//SPAN
+let cardSpan = document.createElement("div");
+cardSpan.innerHTML = i;
+card.appendChild(cardSpan);
+
+grid.appendChild(card);
+
+}
+}*/
 function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
