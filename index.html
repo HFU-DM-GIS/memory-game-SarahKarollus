@@ -1,24 +1,24 @@
-<!DOCTYPE html>
+<!DOCTYPE html>   <!--Typ des Dokumentes-->
 <html>
   <head>
     <title>Memory Game</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />    <!-- bindet die CSS Datei ein -->
+    <script src="script.js" defer></script>                       <!-- bindet die JavaScript Datei ein -->
   </head>
   <body>
-    <div class="container">
+    <div class="container">     <!-- Der "container" umschließt alle sichbaren inhalte der Website-->
       <h1>Memory Game</h1>
-      <div class="grid">
+      <div class="grid">    <!-- die klasse enthält 8 elemente mit der classe "card"-->
         <div class="card" data-card="1"><span>1</span></div>
-        <div class="card" data-card="2"><span>2</span></div>
-        <div class="card" data-card="3"><span>3</span></div>
+        <div class="card" data-card="2"><span>2</span></div>    <!-- jedes dieser 8 Elemente hat ein "data-card" Attribut mit einer Zahl von 1-4-->
+        <div class="card" data-card="3"><span>3</span></div>    <!-- Jedes dieser 8 Elemente hat ein Kind-Element "span" mit einer zahl-->
         <div class="card" data-card="4"><span>4</span></div>
         <div class="card" data-card="1"><span>1</span></div>
         <div class="card" data-card="2"><span>2</span></div>
         <div class="card" data-card="3"><span>3</span></div>
         <div class="card" data-card="4"><span>4</span></div>
       </div>
-      <button id="reset">Reset</button>
+      <button id="reset">Reset</button>  <!-- ein Button mit der id "reset" -->
     </div>
   </body>
 </html>
