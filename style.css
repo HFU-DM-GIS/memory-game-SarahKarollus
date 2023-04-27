@@ -1,42 +1,42 @@
 .container {
-  text-align: center;
-  margin-top: 50px;
+  text-align: center;   /* Zentriert den Inhalt im Container */
+  margin-top: 50px;     /* Setzt den oberen Randabstand des Containers auf 50 Pixel */
 }
 
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: flex;            /* Flexbox zum Erstellen des Rasters */
+  flex-wrap: wrap;          /* Erlaubt einen Zeilenbruch, wenn die Zeile zu lag ist */
+  justify-content: center;  /* Zentriert den Inhalt horizontal im Raster */
 }
 
 .card {
-  width: 150px;
-  height: 150px;
-  margin: 10px;
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 50px;
+  width: 150px;                 /*  Breite der Karte  */
+  height: 150px;                /*  Höhe der Karte */
+  margin: 10px;                 /*  der Abstand zwischen den Karten */
+  background-color: #f2f2f2;  /* die Hintergrundfarbe der Karten */
+  border-radius: 10px;          /* Setzt die abgerundeten Ecken der Karten auf 10 Pixel */
+  cursor: pointer;              /* Ändert den Mauszeiger, wenn der Nutzer über die Karte bewegt */
+  display: flex;                /* Flexbox zum Zentrieren des Inhalts der Karte */
+  justify-content: center;      /* Zentriert den Inhalt horizontal in der Karte */
+  align-items: center;          /* Zentriert den Inhalt vertikal in der Karte */
+  font-size: 50px;              /*  Schriftgröße des Inhalts der Karte  */
 }
 .card span {
-  display: none;
+  display: none;        /* Versteckt den Inhalt der Karte */
 }
 
 span.flipped {
-  display: block;
+  display: block;       /* Zeigt den Inhalt der Karte an, wenn sie umgedreht ist */
 }
 
 .selected {
-  border: black solid 5px;
+  border: black solid 5px;   /* Setzt eine schwarze Linie mit 5 Pixel Breite um die ausgewählte Karte */
 }
 
 .correct {
-  background-color: green;
+  background-color: green;   /* Setzt den Hintergrund der Karte auf Grün, wenn sie korrekt erraten wurde */
 }
 
 .incorrect {
-  background-color: red;
+  background-color: red;     /* Setzt den Hintergrund der Karte auf Rot, wenn sie falsch erraten wurde */
 }

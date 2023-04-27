@@ -1,24 +1,24 @@
-<!DOCTYPE html>
+<!DOCTYPE html>   <!--Typ des Dokumentes-->
 <html>
   <head>
     <title>Memory Game</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />    <!-- bindet die CSS Datei ein -->
+    <script src="script.js" defer></script>                       <!-- bindet die JavaScript Datei ein -->
   </head>
   <body>
-    <div class="container">
+    <div class="container">     <!-- Der "container" umschließt alle sichbaren inhalte der Website-->
       <h1>Memory Game</h1>
-      <div class="grid">
-       <div class="card" data-card="1"><span><img src="Screenshot 2023-04-24 at 14.37.40.png" alt="Spongebob mit fancy Kleid" width="100px"></span></div>
-        <div class="card" data-card="2"><span><img src="Screenshot 2023-04-24 at 14.44.47.png"  alt="Spongebob mit fancy Brille" width="100px"></span></div>
-        <div class="card" data-card="3"><span><img src="Screenshot 2023-04-24 at 14.53.35.png"  alt="Squidward macht Selfie" width="100px"></span></div>
+      <div class="grid">       <!-- die klasse enthält 8 elemente mit der classe "card"-->
+        <div class="card" data-card="1"><span><img src="Screenshot 2023-04-24 at 14.37.40.png" alt="Spongebob mit fancy Kleid" width="100px"></span></div>
+        <div class="card" data-card="2"><span><img src="Screenshot 2023-04-24 at 14.44.47.png"  alt="Spongebob mit fancy Brille" width="100px"></span></div>   <!-- jedes dieser 8 Elemente hat ein "data-card" Attribut mit einer Zahl von 1-4-->
+        <div class="card" data-card="3"><span><img src="Screenshot 2023-04-24 at 14.53.35.png"  alt="Squidward macht Selfie" width="100px"></span></div>       <!-- Jedes dieser 8 Elemente hat ein Kind-Element "span" mit einer zahl-->
         <div class="card" data-card="4"><span><img src="Screenshot 2023-04-24 at 14.50.47.png" alt="Spongebob und Patrick als Steaks" width="100px"></span></div>
         <div class="card" data-card="1"><span><img src="Screenshot 2023-04-24 at 14.37.40.png" alt="Spongebob mit fancy Kleid" width="100px"></span></div>
         <div class="card" data-card="2"><span><img src="Screenshot 2023-04-24 at 14.44.47.png"  alt="Spongebob mit fancy Brille" width="100px"></span></div>
         <div class="card" data-card="3"><span><img src="Screenshot 2023-04-24 at 14.53.35.png"  alt="Squidward macht Selfie" width="100px"></span></div>
-        <div class="card" data-card="4"><span><img src="Screenshot 2023-04-24 at 14.50.47.png" alt="Spongebob und Patrick als Steaks" width="100px"></span></div> 
+        <div class="card" data-card="4"><span><img src="Screenshot 2023-04-24 at 14.50.47.png" alt="Spongebob und Patrick als Steaks" width="100px"></span></div>
       </div>
-      <button id="reset">Reset</button>
+      <button id="reset">Reset</button>  <!-- ein Button mit der id "reset" -->
     </div>
   </body>
 </html>
