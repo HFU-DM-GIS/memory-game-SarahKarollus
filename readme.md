@@ -14,8 +14,8 @@ The cards are always `[1][2][3][4][1][2][3][4]`.
 Add some random positions to the cards. Note that it makes sense to first generate a randomized list of all positions and then place the cards.
 
 ## Tasks
-1. Fix all bugs mentioned above.
-2. Replace the numbers on the cards with images.
+1. Fix all bugs mentioned above.  [DONE]
+2. Replace the numbers on the cards with images.  [DONE]
 3. Let the user change the number of cards to play with.
 4. (Optional) Add a timer and save the times to finish in a leaderboard.
 5. Add a flipping animation for the cards.
