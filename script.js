@@ -80,6 +80,17 @@ function resetBoard() {
   [flippedCard, lockBoard] = [false, false];
   [firstCard, secondCard] = [null, null];
 }
+
+if (resetBoard) {
+  const cards = document.querySelectorAll('.card');
+for (let i = 0; i < cards.length; i++) {
+  const randomIndex = Math.floor(Math.random() * cards.length);
+  const randomCard = cards[randomIndex];
+  const currentCard = cards[i];
+  currentCard.style.order = randomIndex;
+  randomCard.style.order = i;
+}
+}
 // Fügt einen Event Listener für das Umkehren der Karten hinzu
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
