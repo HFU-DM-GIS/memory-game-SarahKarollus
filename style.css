@@ -20,6 +20,7 @@
   justify-content: center;      /* Zentriert den Inhalt horizontal in der Karte */
   align-items: center;          /* Zentriert den Inhalt vertikal in der Karte */
   font-size: 50px;              /*  Schriftgröße des Inhalts der Karte  */
+  order: 0;
 }
 .card span {
   display: none;        /* Versteckt den Inhalt der Karte */

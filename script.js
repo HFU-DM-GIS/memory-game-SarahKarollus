@@ -1,6 +1,30 @@
 const cards = document.querySelectorAll(".card");  // Selektiere alle Elemente mit der Klasse "card"
 const resetButton = document.querySelector("#reset"); // Selektiere das Element mit der ID "reset"
 
+
+
+
+// Random Reihenfolge:
+
+// generiert ein Array mit random int`s von 0 bis length-1
+function generateRandomOrder (length) {
+  const order = [];
+  for (let i = 0; i < length; i++) {
+    order.push(i);
+  }
+  return order.sort(() => Math.random() - 0.5);
+}
+
+//weißt eine random reihenforge jeder karte zu
+const randomOrder = generateRandomOrder(cards.length);
+cards.forEach((card, index) => {
+  card.style.order = randomOrder[index];
+});
+
+
+
+
+
 // Initialisiere Variablen für das umdrehen der Karten
 let flippedCard = false;  // wurde eine Karte umgedreht?
 let lockBoard = false;  // sperrt das Board, während Karten überprüft werden
@@ -81,16 +105,7 @@ function resetBoard() {
   [firstCard, secondCard] = [null, null];
 }
 
-if (resetBoard) {
-  const cards = document.querySelectorAll('.card');
-for (let i = 0; i < cards.length; i++) {
-  const randomIndex = Math.floor(Math.random() * cards.length);
-  const randomCard = cards[randomIndex];
-  const currentCard = cards[i];
-  currentCard.style.order = randomIndex;
-  randomCard.style.order = i;
-}
-}
+
 // Fügt einen Event Listener für das Umkehren der Karten hinzu
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
