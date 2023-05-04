@@ -8,17 +8,17 @@ const resetButton = document.querySelector("#reset"); // Selektiere das Element 
 
 // generiert ein Array mit random int`s von 0 bis length-1
 function generateRandomOrder (length) {
-  const order = [];
-  for (let i = 0; i < length; i++) {
+  const order = []; // [] <- Array
+  for (let i = 0; i < length; i++) {     // i=0    wenn i kleiner wie die länge ist, wird beim nächsten durchgang +1. bis i>= die länge ist. dann wird beendet.
     order.push(i);
   }
-  return order.sort(() => Math.random() - 0.5);
+  return order.sort(() => Math.random() - 0.5);   // hier wird random sortiert.
 }
 
-//weißt eine random reihenforge jeder karte zu
-const randomOrder = generateRandomOrder(cards.length);
-cards.forEach((card, index) => {
-  card.style.order = randomOrder[index];
+//weist eine random reihenforge jeder karte zu
+const randomOrder = generateRandomOrder(cards.length); // in randomOrder steht das, was bei der funktion generateRandomOrder rauskommt.
+cards.forEach((card, index) => {      // für jede karte gibt es einen index.
+  card.style.order = randomOrder[index]; // durch den index der karten werden diese der stellen in der random reihe zugeordnet.
 });
 
 
