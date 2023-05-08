@@ -64,6 +64,12 @@
   align-items: center;          /* Zentriert den Inhalt vertikal in der Karte */
   font-size: 50px;              /*  Schriftgröße des Inhalts der Karte  */
   order: 0;
+  transform: 0.2s;
+  
+}
+
+.card:hover{
+ transform: rotateY(180deg); 
 }
 .card span {
   display: none;        /* Versteckt den Inhalt der Karte */
