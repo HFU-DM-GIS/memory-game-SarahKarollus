@@ -5,7 +5,7 @@
 
 .grid {
   display: flex;            /* Flexbox zum Erstellen des Rasters */
-  flex-wrap: wrap;          /* Erlaubt einen Zeilenbruch, wenn die Zeile zu lag ist */
+  flex-wrap: wrap;          /* Erlaubt einen Zeilenbruch, wenn die Zeile zu lang ist */
   justify-content: center;  /* Zentriert den Inhalt horizontal im Raster */
 }
 
