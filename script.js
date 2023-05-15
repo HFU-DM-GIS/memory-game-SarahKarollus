@@ -3,12 +3,12 @@ const resetButton = document.querySelector("#reset"); // Selektiere das Element 
 const cardCountSelect = document.getElementById("card-count"); // Selektiere das Dropdown-Menü
 const memoryGame = document.getElementById("memoryGame"); // Selektiere den Container für die Karten
 let cardNumber = 6;
+let firstCardofDeck;
+let secondCardofDeck;
+let cardCounter = 0;
+let bildArray = [];
 
 // Anzahl der Karten ändern:
-
-//select.addEventListener("change", selectChange);
-
-//function selectChange()
 
 
   // Arrayliste mit den Karten 
@@ -71,15 +71,72 @@ shuffle(itemsDouble); //Shuffle funktionion wird mit dem Array itemsDOuble aufge
   cardClass.setAttribute("class", "card"); //Klasse wird definirt für das div
   let imgFrontFace = document.createElement("img"); //Image Element wird erstellt
   imgFrontFace.setAttribute("class", "front-face"); //Bekommt die klasse front-face
-  imgFrontFace.setAttribute("src", itemsDouble[i].image); //Bild wird in das Image element reingeladen aus dem array
+  imgFrontFace.setAttribute("src", "questionMark.png"); //Bild wird in das Image element reingeladen aus dem array
+  imgFrontFace.setAttribute("realImageSource", itemsDouble[i].image)
   imgFrontFace.setAttribute("width", "100px"); //breite
   imgFrontFace.setAttribute("height", "100px"); //höhe
-
   cardClass.appendChild(imgFrontFace); //img Element wird in das div angehängt
   memoryGame.appendChild(cardClass); //Das div wird an die section angehängt
 
+  imgFrontFace.addEventListener(  //In dem Event listener wird das IMG ELEMENT imgFrontFace an die function flipCard weitergegeben
+    "click", 
+    function() {          
+      flipCard(imgFrontFace);  //flipCard function wird aufgerufen mit der jeweiligen Karte um damit zu arbeiten
+    }, 
+    false //weil gegoogelt addEventListener mit Argumenten
+ );
+ bildArray.push(imgFrontFace);
+
   }
 }
+
+function flipCard(imgFrontFace) {
+  imgFrontFace.setAttribute("src", imgFrontFace.getAttribute("realImageSource"));
+
+  cardCounter++;
+  if(cardCounter == 1) {
+    firstCard = imgFrontFace
+    console.log(firstCard);
+
+  } else if (cardCounter == 2) {
+    secondCard = imgFrontFace
+    console.log(secondCard);
+
+  } else {
+    cardCounter = 1;
+    firstCard = imgFrontFace
+    console.log(firstCard);
+
+    secondCard = null;
+  }
+
+  if(cardCounter == 2) {
+  if(firstCard.getAttribute("realImageSource") == secondCard.getAttribute("realImageSource")) {
+    console.log("Stimmt");
+  }else {
+    console.log("Stimmt nicht");
+
+    setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
+      imgFrontFace.setAttribute("src", "questionMark.png");
+
+    }, 2000);
+
+    for(let i = 0;i<bildArray.length; i++) {
+      if(firstCard == bildArray[i]) {
+        setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
+          bildArray[i].setAttribute("src", "questionMark.png");
+    
+        }, 2000);
+      }
+    }
+
+  }
+}
+
+
+}
+
+
 function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
 
@@ -97,83 +154,6 @@ function shuffle(array) {
 
   return array;
 }
-
-
-
-// Initialisiere Variablen für das umdrehen der Karten
-let flippedCard = false;  // wurde eine Karte umgedreht?
-let lockBoard = false;  // sperrt das Board, während Karten überprüft werden
-let firstCard, secondCard;    // hält die beiden Karten, die verglichen werden
-
-
-// wird ausgeführt, wenn man auf eine Karte klickt
-function flipCard() {
-  if (lockBoard) return;            // prüft ob das Board geperrt ist
-  if (this === firstCard) return;   // Prüft ob zweimal auf die selbe Karte geklickt wurde
-                                    // wenn einer der zwei fälle zutrifft, wird die Funktion hier beendet
-  
- // wenn noch keine Karte umgedreht wurde:
- if (!flippedCard) {
-  
-  // Hinzufügen von Klassen zur ersten Karte, um sie als ausgewählt und umgedreht zu markieren
-    this.classList.add("selected");   
-    console.log(this.firstChild);   // Konsolenausgabe für Debugging-Zwecke
-    this.firstChild.classList.add("flipped");   
-    flippedCard = true;
-    firstCard = this;
-    return;
-  }
-  
-  // wenn schon eine Karte umgedreht wurde:
-  this.classList.add("selected");
-  this.firstChild.classList.add("flipped");
-  secondCard = this;
-  checkForMatch();    //Weiter zur function checkForMatch
-}
-
-// Überprüfung auf Kartenübereinstimmung
-function checkForMatch() {
-  if (firstCard.dataset.card === secondCard.dataset.card) { // prüft ob die "dataset.card" Eigenschaften der karten übereinstimmen
-    disableCards();   // wenn sie übereinstimmen, wird die Funktion "disableCards" ausgeführt. die Karten werden aus dem Spiel "entfernt" bzw gefreezed
-    return;
-  }
-
-  unflipCards();  // wenn sie nicht übereinstimmen wird die Funktion "unflipCards" ausgeführt und die Karten werden wieder umgedreht
-}
-
-// Deaktiviert die ersten beiden Karten und setzt das Board zurück
-function disableCards() {
-  
-  // die "click"-Eventlistener von beiden Karten werden entfernt, damit die "flipCard" Funktion nicht mehr ausgeführt werden kann
-  firstCard.removeEventListener("click", flipCard);   
-  secondCard.removeEventListener("click", flipCard);
-  
-  // die Klassen "correct" werden hizugefügt um ein Paar zu symbolisieren
-  firstCard.classList.add("correct");
-  secondCard.classList.add("correct");
- 
-  //  firstCard, secondCard, flippedCard und lockBoard werden zurückgesetzt und es kann weiter gespielt werdenn.
-  resetBoard();
-}
-
-// Dreht beiden Karten zurück wenn diese nicht übereinstimmen 
-function unflipCards() {
-  lockBoard = true;
-  firstCard.classList.add("incorrect"); // fügt die klasse "incorrect" hinzu
-  secondCard.classList.add("incorrect");  // fügt die klasse "incorrect" hinzu
-
-  // Das Board wird gesperrt -> es wird verhindert, dass keine weiteren Karten ausgewählt werden können
-  setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
-    
-    firstCard.classList.remove("selected", "incorrect");    // nach Ablauf des Timers: klassen "selected"
-    secondCard.classList.remove("selected", "incorrect");   // und "incorrect" werden von den Karte entfernt.
-    
-    firstCard.firstChild.classList.remove("flipped");     // die Klasse "flipped" wird von den ersten beiden Kindelementen beider Karten entfernt
-    secondCard.firstChild.classList.remove("flipped");    // wodurch die Karten wieder umgedreht werden.
-    resetBoard();   // das Board wird mit der Funktion "resetBoard" zurückgesetzt
-  }, 1000);
-}
-
 // Setzt die Variablen für das Umdrehen der Karten zurück
 function resetBoard() {
   [flippedCard, lockBoard] = [false, false];
