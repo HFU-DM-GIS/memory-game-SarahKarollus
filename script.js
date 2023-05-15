@@ -9,7 +9,7 @@ let cardNumber = 6;
 
 //select.addEventListener("change", selectChange);
 
-// API einbinden
+/* API einbinden
 
 cards.forEach(card => {
   fetch('https://api.unsplash.com/photos/random?client_id=' + accessKey)
@@ -23,6 +23,7 @@ cards.forEach(card => {
       console.log(error);
     });
 });
+*/
 
 //function selectChange()
 
