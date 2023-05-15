@@ -1,27 +1,102 @@
 const cards = document.querySelectorAll(".card");  // Selektiere alle Elemente mit der Klasse "card"
 const resetButton = document.querySelector("#reset"); // Selektiere das Element mit der ID "reset"
+const cardCountSelect = document.getElementById("card-count"); // Selektiere das Dropdown-Menü
+const memoryGame = document.getElementById("memoryGame"); // Selektiere den Container für die Karten
+let cardNumber = 6;
+
+// Anzahl der Karten ändern:
+
+//select.addEventListener("change", selectChange);
+
+//function selectChange()
 
 
+  // Arrayliste mit den Karten 
+    const items = [
+    {name: "Spongebob und Patrick als Steaks", image: "spongebob_meat.png"},
+    {name: "Spongebob mit fancy Kleid", image: "spongebob_princess.png"}, 
+    {name: "Spongebob mit fancy Brille", image: "spongebob_sunglasses.png"}, 
+    {name: "Squidward macht Selfie", image: "Squidward.png"},
+    {name: "Spongebob im Kostüm", image: "spongebob_costume.png"},
+    {name: "Spongebob mit Blume", image: "spongebob_flower.png"},
+  ];
 
+// Timer 
+let seconds = 0,
+minutes = 0;
 
-// Random Reihenfolge:
-
-// generiert ein Array mit random int`s von 0 bis length-1
-function generateRandomOrder (length) {
-  const order = []; // [] <- Array
-  for (let i = 0; i < length; i++) {     // i=0    wenn i kleiner wie die länge ist, wird beim nächsten durchgang +1. bis i>= die länge ist. dann wird beendet.
-    order.push(i);
+const timeGenerator = () => {
+  seconds += 1;
+  if (seconds >= 60) {
+    minutes += 1;
+    seconds = 0;
   }
-  return order.sort(() => Math.random() - 0.5);   // hier wird random sortiert.
+
+//format time before displaying 
+let secondsValue = seconds < 10 ?  `0${seconds}` :
+seconds;
+let minutesValue = minutes < 10 ?  `0${minutes}` :
+minutes;
+timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
+};
+
+
+
+
+
+const options = [
+  { label: "6 Karten", value: 6 },
+  { label: "8 Karten", value: 8 },
+  { label: "12 Karten", value: 12 },
+];
+
+//Laden wir Karten
+loadCards();
+
+
+
+function loadCards() {
+  let itemsDouble = []; // Array erstellt, wo alles verdoppelt wird
+//double items
+for(let j= 0; j<2; j++) { // Ablauf 2 Mal
+for(let y= 0; y<items.length; y++) { //Alle Elemente von items werden in ItemsDouble kopiert
+  itemsDouble.push(items[y]);
 }
+}
+//Randomize Array
+shuffle(itemsDouble); //Shuffle funktionion wird mit dem Array itemsDOuble aufgerufen. itemsDouble wird so in der FUnktion randomisiert
 
-//weist eine random reihenfolge jeder karte zu
-const randomOrder = generateRandomOrder(cards.length); // in randomOrder steht das, was bei der funktion generateRandomOrder rauskommt.
-cards.forEach((card, index) => {      // für jede karte gibt es einen index.
-  card.style.order = randomOrder[index]; // durch den index der karten werden diese der stellen in der random reihe zugeordnet.
-});
+  for(let i = 0 ; i< itemsDouble.length; i++) { //For schleife mir länge von items Double. Items von ItemsDouble werden in de Webseite ins HTML reingeladen
+  let cardClass = document.createElement("div"); //Div erstellt
+  cardClass.setAttribute("class", "card"); //Klasse wird definirt für das div
+  let imgFrontFace = document.createElement("img"); //Image Element wird erstellt
+  imgFrontFace.setAttribute("class", "front-face"); //Bekommt die klasse front-face
+  imgFrontFace.setAttribute("src", itemsDouble[i].image); //Bild wird in das Image element reingeladen aus dem array
+  imgFrontFace.setAttribute("width", "100px"); //breite
+  imgFrontFace.setAttribute("height", "100px"); //höhe
 
+  cardClass.appendChild(imgFrontFace); //img Element wird in das div angehängt
+  memoryGame.appendChild(cardClass); //Das div wird an die section angehängt
 
+  }
+}
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
 
 
 

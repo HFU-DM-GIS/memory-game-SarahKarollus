@@ -8,24 +8,72 @@
   <body>
     <div class="container">     <!-- Der "container" umschließt alle sichbaren inhalte der Website-->
       <h1>Memory Game</h1>
-      <div class="dropdownmenu">
-        <button class="dropdownbutton">Anzahl Karten</button>
-        <div class="dropdown-content">
-          <a href="#">6</a>
-          <a href="#">8</a>
-          <a href="#">12</a>
+
+        <label for="card-count">Anzahl der Karten:</label>
+        <select id="card-count">
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="12">12</option>
+        </select>
+
+      <section id="memoryGame">
+        <!-- <div class="card">
+      <img class="front-face" src="spongebob_meat.png"  alt="Spongebob und Patrick als Steaks" width="100px"/>
+      <img  class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
         </div>
+        <div class="card">
+      <img class="front-face" src="spongebob_princess.png"  alt="Spongebob mit fancy Kleid" width="100px"/>  
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
+        </div>
+        <div class="card">
+      <img class="front-face" src="spongebob_sunglasses.png"  alt="Spongebob mit fancy Brille" width="100px"/>      
+      <img class="back-face"src="questionMark.png" alt="question mark" width="100px"/>
       </div>
-      <div class="grid">       <!-- die klasse enthält 8 elemente mit der classe "card"-->
-        <div class="card" data-card="1"><span><img src="spongebob_meat.png" alt="Spongebob und Patrick als Steaks" width="100px"></span></div>
-        <div class="card" data-card="2"><span><img src="spongebob_princess.png"  alt="Spongebob mit fancy Kleid" width="100px"></span></div>   <!-- jedes dieser 8 Elemente hat ein "data-card" Attribut mit einer Zahl von 1-4-->
-        <div class="card" data-card="3"><span><img src="spongebob_sunglasses.png"  alt="Spongebob mit fancy Brille" width="100px"></span></div>       <!-- Jedes dieser 8 Elemente hat ein Kind-Element "span" mit einem bild-->
-        <div class="card" data-card="4"><span><img src="Squidward.png" alt="Squidward macht Selfie" width="100px"></span></div>
-        <div class="card" data-card="1"><span><img src="spongebob_meat.png" alt="Spongebob und Patrick als Steaks" width="100px"></span></div>
-        <div class="card" data-card="2"><span><img src="spongebob_princess.png"  alt="Spongebob mit fancy Kleid" width="100px"></span></div>
-        <div class="card" data-card="3"><span><img src="spongebob_sunglasses.png"  alt="Spongebob mit fancy Brille" width="100px"></span></div>
-        <div class="card" data-card="4"><span><img src="Squidward.png" alt="Squidward macht Selfie" width="100px"></span></div>
+        <div class="card">
+      <img class="front-face" src="Squidward.png" alt="Squidward macht Selfie" width="100px"/>
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
       </div>
+        <div class="card">
+      <img class="front-face"src="spongebob_costume.png" alt="Spongebob im Kostüm" width="100px"/> 
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
+      </div>
+        <div class="card">
+      <img class="front-face" src="spongebob_flower.png" alt="Spongebob mit Blume" width="100px"/> 
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
+      </div>
+        <div class="card">
+      <img class="front-face"src="Squidward_dancing.png" alt="Squidward tanzt lustig" width="100px"/> 
+      <img class="back-face"src="questionMark.png" alt="question mark" width="100px"/>
+      </div>
+        <div class="card">
+      <img class="front-face" src="spongebob_meat.png" alt="Spongebob und Patrick als Steaks" width="100px"/>
+      <img class="back-face"src="questionMark.png" alt="question mark" width="100px"/>
+      </div>
+        <div class="card">
+      <img class="front-face" src="spongebob_princess.png"  alt="Spongebob mit fancy Kleid" width="100px"/>
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
+      </div>
+        <div class="card">
+      <img class="front-face" src="spongebob_sunglasses.png"  alt="Spongebob mit fancy Brille" width="100px"/>
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
+      </div>
+        <div class="card">
+      <img class="front-face" src="Squidward.png" alt="Squidward macht Selfie" width="100px"/>
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
+      </div>
+        <div class="card">
+      <img class="front-face" src="spongebob_costume.png" alt="Spongebob im Kostüm" width="100px"/> 
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
+      </div>
+        <div class="card">
+      <img class="front-face"src="spongebob_flower.png" alt="Spongebob mit Blume" width="100px"/> 
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
+      </div>
+        <div class="card">
+      <img class="front-face" src="Squidward_dancing.png" alt="Squidward tanzt lustig" width="100px"/> 
+      <img class="back-face" src="questionMark.png" alt="question mark" width="100px"/>
+      </div> -->
+  </section>
       <button id="reset">Reset</button>  <!-- ein Button mit der id "reset" -->
     </div>
   </body>

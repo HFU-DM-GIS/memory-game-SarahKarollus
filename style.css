@@ -1,6 +1,20 @@
+
 .container {
   text-align: center;   /* Zentriert den Inhalt im Container */
   margin-top: 50px;     /* Setzt den oberen Randabstand des Containers auf 50 Pixel */
+}
+#memoryGame {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+.card {
+  margin: 10px;
+}
+#card-count {
+  margin-bottom: 40px;
 }
 
 .grid {
@@ -9,50 +23,7 @@
   justify-content: center;  /* Zentriert den Inhalt horizontal im Raster */
 }
 
-/* Style den button vom Menü */
-.dropdownbutton {
-  background-color: #020101;
-  color: white;
-  padding: 10px;
-  font-size: 12px;
-  border: none;
-  cursor: pointer;
-}
-
-/* wichtig, damit das Drwopdown-Menü direkt unter dem Button ist*/
-.dropdownmenu {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content ist versteckt  bis rübergehovered wird*/
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 100px;
-  box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Zahlen im Drowpdown-Menü */
-.dropdown-content a {
-  color: black;
-  padding: 8px 8px;
-  text-decoration: none;
-  display: block;
-}
-
-/* beim Rüberhovern verändert sich die Farbe der jewiligen Box ganz leicht */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Anzeigen des Dropdown-Menüs, wenn man rüberhovered */
-.dropdownmenu:hover .dropdown-content {
-  display: block;
-}
-
-
-.card {
+.img  {
   width: 150px;                 /*  Breite der Karte  */
   height: 150px;                /*  Höhe der Karte */
   margin: 10px;                 /*  der Abstand zwischen den Karten */
@@ -65,16 +36,19 @@
   font-size: 50px;              /*  Schriftgröße des Inhalts der Karte  */
   order: 0;
 }
-.card span {
+#reset {
+  margin-top: 40px;
+}
+.frontface {
   display: none;        /* Versteckt den Inhalt der Karte */
 }
 
-span.flipped {
+.flipped {
   display: block;       /* Zeigt den Inhalt der Karte an, wenn sie umgedreht ist */
 }
 
 .selected {
-  border: black solid 5px;   /* Setzt eine schwarze Linie mit 5 Pixel Breite um die ausgewählte Karte */
+  border: black solid 2px;   /* Setzt eine schwarze Linie mit 5 Pixel Breite um die ausgewählte Karte */
 }
 
 .correct {
