@@ -8,6 +8,20 @@ let cardNumber = 6;
 
 //select.addEventListener("change", selectChange);
 
+// API einbinden
+ 
+const accessKey = Ht2EK3qiirwzPCh48aA6O5tmuHaH3MMeaM51QLZcNJE; // Access Key
+
+fetch('https://api.unsplash.com/photos/random?client_id=' + accessKey)
+  .then(response => response.json())
+  .then(data => {
+    const imageUrl = data.urls.regular; // Passe dies entsprechend an, um die gewünschte Bildgröße zu erhalten
+    // Verwende die imageUrl, um das Bild in deiner Anwendung einzufügen
+  })
+ .catch(error => {
+    // Behandle Fehler bei der API-Anfrage
+    console.log(error
+
 //function selectChange()
 
 
