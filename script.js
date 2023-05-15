@@ -2,6 +2,7 @@ const cards = document.querySelectorAll(".card");  // Selektiere alle Elemente m
 const resetButton = document.querySelector("#reset"); // Selektiere das Element mit der ID "reset"
 const cardCountSelect = document.getElementById("card-count"); // Selektiere das Dropdown-Menü
 const memoryGame = document.getElementById("memoryGame"); // Selektiere den Container für die Karten
+const accessKey = Ht2EK3qiirwzPCh48aA6O5tmuHaH3MMeaM51QLZcNJE; // Access Key
 let cardNumber = 6;
 let firstCardofDeck;
 let secondCardofDeck;
@@ -10,6 +11,21 @@ let bildArray = [];
 
 // Anzahl der Karten ändern:
 
+/* API einbinden
+
+cards.forEach(card => {
+  fetch('https://api.unsplash.com/photos/random?client_id=' + accessKey)
+    .then(response => response.json())
+    .then(data => {
+      const imageUrl = data.urls.regular; // Passe dies entsprechend an, um die gewünschte Bildgröße zu erhalten
+      card.style.backgroundImage = `url(${imageUrl})`;
+    })
+    .catch(error => {
+      // Behandle Fehler bei der API-Anfrage
+      console.log(error);
+    });
+});
+*/
 
   // Arrayliste mit den Karten 
     const items = [
