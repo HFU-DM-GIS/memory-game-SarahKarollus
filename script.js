@@ -64,7 +64,7 @@ function resetTimer() {
 }
 
 */ //Timer versuch 2 Ende
-// Timer versuch 3
+/* Timer versuch 3
 function startTimer() {
   timerInterval = setInterval(() => {
     seconds++;
@@ -88,7 +88,7 @@ function resetTimer() {
   displayTimer();
 }
 
-// Timerversuch 3 Ende
+*/ //Timerversuch 3 Ende
 
 /* API einbinden
 
