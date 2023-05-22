@@ -1,14 +1,16 @@
-const cards = document.querySelectorAll(".card");  // Selektiere alle Elemente mit der Klasse "card"
-const resetButton = document.querySelector("#reset"); // Selektiere das Element mit der ID "reset"
-const cardCountSelect = document.getElementById("card-count"); // Selektiere das Dropdown-Menü
-const memoryGame = document.getElementById("memoryGame"); // Selektiere den Container für die Karten
-// const accessKey = Ht2EK3qiirwzPCh48aA6O5tmuHaH3MMeaM51QLZcNJE; // Access Key
+const cards = document.querySelectorAll(".card");  // Select all elements with the class "card"
+const resetButton = document.querySelector("#reset"); // Select the element with the ID "reset"
+const cardCountSelect = document.getElementById("card-count"); // Select the dropdown menu
+const memoryGame = document.getElementById("memoryGame"); // Select the container for the cards
+//  const accessKey = Ht2EK3qiirwzPCh48aA6O5tmuHaH3MMeaM51QLZcNJE; // Access Key
+
 let cardNumber = 6;
 let firstCardofDeck;
 let secondCardofDeck;
 let cardCounter = 0;
 let bildArray = [];
-
+let timerinterval;
+let seconds = 0;
 // Anzahl der Karten ändern:
 
 /* API einbinden
@@ -37,7 +39,7 @@ cards.forEach(card => {
     {name: "Spongebob mit Blume", image: "spongebob_flower.png"},
   ];
 
-// Timer 
+/* Timer versuch 1
 let seconds = 0,
 minutes = 0;
 
@@ -49,22 +51,48 @@ const timeGenerator = () => {
   }
 
 //format time before displaying 
-let secondsValue = seconds < 10 ?  `0${seconds}` :
-seconds;
-let minutesValue = minutes < 10 ?  `0${minutes}` :
-minutes;
-timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
-};
 
+let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
+    let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
+    document.getElementById("timer").innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
+  };
 
+  setInterval(timeGenerator, 1000);
 
+*/
+// Timer versuch 1 Ende
 
+/*Timer versuch 2
 
-const options = [
-  { label: "6 Karten", value: 6 },
-  { label: "8 Karten", value: 8 },
-  { label: "12 Karten", value: 12 },
-];
+//Timer wird gestartet
+function startTimer() { 
+  timerInterval = setInterval(() => {
+    seconds++;
+    displayTimer();
+  }, 1000);
+}
+
+// Timer wird angezeigt
+function displayTimer() {
+  const minutes = Math.floor(seconds / 60);
+  const formattetSeconds = String(seconds % 60).padStart(2, "0");
+  document.getElementById("timer").textContent = `Time: ${minutes}:${formattetSeconds}`;
+}
+
+// Timer wird gestoppt
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+// Timer wird zurückgesetzt
+function resetTimer() {
+  stopTimer();
+  seconds = 0;
+  displayTimer();
+}
+
+*/ //Timer versuch 2 Ende
+
 
 //Laden wir Karten
 loadCards();
@@ -184,3 +212,21 @@ cards.forEach((card) => card.addEventListener("click", flipCard));
 resetButton.addEventListener("click", () => {
   location.reload();
 });
+
+// Get the timer element
+var timerElement = document.getElementById("timer");
+
+// Function to start the timer
+function startTimer() {
+  var seconds = 0;
+  setInterval(function () {
+    seconds++;
+    timerElement.textContent = "Time: " + seconds + "s";
+  }, 1000);
+}
+
+// Call the startTimer function whenever a card is flipped
+
+for (var i = 0; i < cards.length; i++) {
+  cards[i].addEventListener("click", startTimer);
+}
