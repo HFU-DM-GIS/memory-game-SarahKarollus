@@ -2,95 +2,15 @@ const cards = document.querySelectorAll(".card");  // Selektiere alle Elemente m
 const resetButton = document.querySelector("#reset"); // Selektiere das Element mit der ID "reset"
 const cardCountSelect = document.getElementById("card-count"); // Selektiere das Dropdown-Menü
 const memoryGame = document.getElementById("memoryGame"); // Selektiere den Container für die Karten
+const accessKey = Ht2EK3qiirwzPCh48aA6O5tmuHaH3MMeaM51QLZcNJE; // Access Key
 let numberOfCards = 6;
 let firstCard;
 let secondCard;
 let cardCounter = 0;
 let bildArray = [];
 
-// let timerinterval;
-// let seconds = 0;
 
-/* Timer versuch 1
-let seconds = 0,
-minutes = 0;
-
-const timeGenerator = () => {
-  seconds += 1;
-  if (seconds >= 60) {
-    minutes += 1;
-    seconds = 0;
-  }
-
-//format time before displaying 
-
-let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
-    let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
-    document.getElementById("timer").innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
-  };
-
-setInterval(timeGenerator, 1000);
-
-*/
-// Timer versuch 1 Ende
-
-/*Timer versuch 2
-
-//Timer wird gestartet
-function startTimer() { 
-  timerInterval = setInterval(() => {
-    seconds++;
-    displayTimer();
-  }, 1000);
-}
-
-// Timer wird angezeigt
-function displayTimer() {
-  const minutes = Math.floor(seconds / 60);
-  const formattetSeconds = String(seconds % 60).padStart(2, "0");
-  document.getElementById("timer").textContent = `Time: ${minutes}:${formattetSeconds}`;
-}
-
-// Timer wird gestoppt
-function stopTimer() {
-  clearInterval(timerInterval);
-}
-
-// Timer wird zurückgesetzt
-function resetTimer() {
-  stopTimer();
-  seconds = 0;
-  displayTimer();
-}
-
-*/ //Timer versuch 2 Ende
-/* Timer versuch 3
-function startTimer() {
-  timerInterval = setInterval(() => {
-    seconds++;
-    displayTimer();
-  }, 1000);
-}
-
-function displayTimer() {
-  const minutes = Math.floor(seconds / 60);
-  const formattedSeconds = String(seconds % 60).padStart(2, "0");
-  document.getElementById("timer").textContent = `Time: ${minutes}:${formattedSeconds}`;
-}
-
-function stopTimer() {
-  clearInterval(timerInterval);
-}
-
-function resetTimer() {
-  stopTimer();
-  seconds = 0;
-  displayTimer();
-}
-
-*/ //Timerversuch 3 Ende
-
-/* API einbinden
+// API einbinden
 
 cards.forEach(card => {
   fetch('https://api.unsplash.com/photos/random?client_id=' + accessKey)
@@ -104,44 +24,44 @@ cards.forEach(card => {
       console.log(error);
     });
 });
-*/
+
 
 // Anzahl der Karten ändern:
 cardCountSelect.addEventListener("change", (event) => {
-if(event.target.value == 6) {
-numberOfCards = 6;
-}else if(event.target.value == 8) {
-numberOfCards = 8;
-}else if(event.target.value == 12) {
-numberOfCards = 12;
-}
-changeNumberOfCards();
+  if (event.target.value == 6) {
+    numberOfCards = 6;
+  } else if (event.target.value == 8) {
+    numberOfCards = 8;
+  } else if (event.target.value == 12) {
+    numberOfCards = 12;
+  }
+  changeNumberOfCards();
 });
 
 
 //function selectChange()
 
 
-  // Arrayliste mit den Karten 
-    let allItems = [
-    {name: "Spongebob und Patrick als Steaks", image: "spongebob_meat.png"},
-    {name: "Spongebob mit fancy Kleid", image: "spongebob_princess.png"}, 
-    {name: "Spongebob mit fancy Brille", image: "spongebob_sunglasses.png"}, 
-    {name: "Squidward macht Selfie", image: "Squidward.png"},
-    {name: "Spongebob im Kostüm", image: "spongebob_costume.png"},
-    {name: "Spongebob mit Blume", image: "spongebob_flower.png"},
+// Arrayliste mit den Karten 
+let allItems = [
+  { name: "Spongebob und Patrick als Steaks", image: "spongebob_meat.png" },
+  { name: "Spongebob mit fancy Kleid", image: "spongebob_princess.png" },
+  { name: "Spongebob mit fancy Brille", image: "spongebob_sunglasses.png" },
+  { name: "Squidward macht Selfie", image: "Squidward.png" },
+  { name: "Spongebob im Kostüm", image: "spongebob_costume.png" },
+  { name: "Spongebob mit Blume", image: "spongebob_flower.png" },
 
-    {name: "Spongebob und Patrick als Steaks", image: "spongebob_meat.png"},
-    {name: "Spongebob mit fancy Kleid", image: "spongebob_princess.png"}, 
-    {name: "Spongebob mit fancy Brille", image: "spongebob_sunglasses.png"}, 
-    {name: "Squidward macht Selfie", image: "Squidward.png"},
-    {name: "Spongebob im Kostüm", image: "spongebob_costume.png"},
-    {name: "Spongebob mit Blume", image: "spongebob_flower.png"},
-  ];
-  let items = [
-  ];
-  let itemsDouble = [
-  ];
+  { name: "Spongebob und Patrick als Steaks", image: "spongebob_meat.png" },
+  { name: "Spongebob mit fancy Kleid", image: "spongebob_princess.png" },
+  { name: "Spongebob mit fancy Brille", image: "spongebob_sunglasses.png" },
+  { name: "Squidward macht Selfie", image: "Squidward.png" },
+  { name: "Spongebob im Kostüm", image: "spongebob_costume.png" },
+  { name: "Spongebob mit Blume", image: "spongebob_flower.png" },
+];
+let items = [
+];
+let itemsDouble = [
+];
 
 changeNumberOfCards();
 
@@ -152,49 +72,49 @@ changeNumberOfCards();
 
 function changeNumberOfCards() {
   items = [];
-  for(i = 0; i<numberOfCards; i++) {
-  items.push(allItems[i]);
+  for (i = 0; i < numberOfCards; i++) {
+    items.push(allItems[i]);
   }
   while (memoryGame.firstChild) {
     memoryGame.removeChild(memoryGame.lastChild);
   }
   loadCards();
-  
-  }
+
+}
 
 
 function loadCards() {
   itemsDouble = []; // Array erstellt, wo alles verdoppelt wird
   console.log(itemsDouble);
-//double items
-for(let j= 0; j<2; j++) { // Ablauf 2 Mal
-for(let y= 0; y<items.length; y++) { //Alle Elemente von items werden in ItemsDouble kopiert
-  itemsDouble.push(items[y]);
-}
-}
-//Randomize Array
-shuffle(itemsDouble); //Shuffle funktion wird mit dem Array itemsDouble aufgerufen. itemsDouble wird so in der FUnktion randomisiert
+  //double items
+  for (let j = 0; j < 2; j++) { // Ablauf 2 Mal
+    for (let y = 0; y < items.length; y++) { //Alle Elemente von items werden in ItemsDouble kopiert
+      itemsDouble.push(items[y]);
+    }
+  }
+  //Randomize Array
+  shuffle(itemsDouble); //Shuffle funktion wird mit dem Array itemsDouble aufgerufen. itemsDouble wird so in der FUnktion randomisiert
 
-  for(let i = 0 ; i< itemsDouble.length; i++) { //For schleife mir länge von items Double. Items von ItemsDouble werden in de Webseite ins HTML reingeladen
-  let cardClass = document.createElement("div"); //Div erstellt
-  cardClass.setAttribute("class", "card"); //Klasse wird definirt für das div
-  let imgFrontFace = document.createElement("img"); //Image Element wird erstellt
-  imgFrontFace.setAttribute("class", "front-face"); //Bekommt die klasse front-face
-  imgFrontFace.setAttribute("src", "questionMark.png"); //Bild wird in das Image element reingeladen aus dem array
-  imgFrontFace.setAttribute("realImageSource", itemsDouble[i].image)
-  imgFrontFace.setAttribute("width", "100px"); //breite
-  imgFrontFace.setAttribute("height", "100px"); //höhe
-  cardClass.appendChild(imgFrontFace); //img Element wird in das div angehängt
-  memoryGame.appendChild(cardClass); //Das div wird an die section angehängt
+  for (let i = 0; i < itemsDouble.length; i++) { //For schleife mir länge von items Double. Items von ItemsDouble werden in de Webseite ins HTML reingeladen
+    let cardClass = document.createElement("div"); //Div erstellt
+    cardClass.setAttribute("class", "card"); //Klasse wird definirt für das div
+    let imgFrontFace = document.createElement("img"); //Image Element wird erstellt
+    imgFrontFace.setAttribute("class", "front-face"); //Bekommt die klasse front-face
+    imgFrontFace.setAttribute("src", "questionMark.png"); //Bild wird in das Image element reingeladen aus dem array
+    imgFrontFace.setAttribute("realImageSource", itemsDouble[i].image)
+    imgFrontFace.setAttribute("width", "100px"); //breite
+    imgFrontFace.setAttribute("height", "100px"); //höhe
+    cardClass.appendChild(imgFrontFace); //img Element wird in das div angehängt
+    memoryGame.appendChild(cardClass); //Das div wird an die section angehängt
 
-  imgFrontFace.addEventListener(  //In dem Event listener wird das IMG ELEMENT imgFrontFace an die function flipCard weitergegeben
-    "click", 
-    function() {          
-      flipCard(imgFrontFace);  //flipCard function wird aufgerufen mit der jeweiligen Karte um damit zu arbeiten
-    }, 
-    false //weil gegoogelt addEventListener mit Argumenten
- );
- bildArray.push(imgFrontFace);
+    imgFrontFace.addEventListener(  //In dem Event listener wird das IMG ELEMENT imgFrontFace an die function flipCard weitergegeben
+      "click",
+      function () {
+        flipCard(imgFrontFace);  //flipCard function wird aufgerufen mit der jeweiligen Karte um damit zu arbeiten
+      },
+      false //weil gegoogelt addEventListener mit Argumenten
+    );
+    bildArray.push(imgFrontFace);
 
   }
 }
@@ -202,8 +122,9 @@ shuffle(itemsDouble); //Shuffle funktion wird mit dem Array itemsDouble aufgeruf
 function flipCard(imgFrontFace) { //Bild wird angeklickt -> Funktion flipCard wird aufgerufen -> imgFrontFace ist das angeklickte Bild und wird an Funktion weitergegeben
   imgFrontFace.setAttribute("src", imgFrontFace.getAttribute("realImageSource")); // -> hier verändern wir von questionmark zum richtigen Bild  ->setzt die "src"-Eigenschaft des Bildes auf den Wert der "realImageSource"-Eigenschaft (enthält den  Pfad zur eigentlichen Bildquelle) ((sonst ist es nur das questionmark))
 
+
   cardCounter++; // Der Wert von "cardCounter" wird um eins erhöht -> "cardCounter" verfolgt+prüft ob es sich um die erste oder zweite Karte handelt 
-  if(cardCounter == 1) { //Wenn "cardCounter" gleich 1 ist, wird der folgende Codeblock ausgeführt
+  if (cardCounter == 1) { //Wenn "cardCounter" gleich 1 ist, wird der folgende Codeblock ausgeführt
     firstCard = imgFrontFace //speichert imgFrontface in die Variable 
     console.log(firstCard);
 
@@ -219,35 +140,35 @@ function flipCard(imgFrontFace) { //Bild wird angeklickt -> Funktion flipCard wi
     secondCard = null; // die zweite Karte von davor wird entfernt 
   }
 
-  if(cardCounter == 2) {
-  if(firstCard.getAttribute("realImageSource") == secondCard.getAttribute("realImageSource")) { // Wenn die "realImageSource"-Eigenschaft des ersten Bildes der "realImageSource"-Eigenschaft des zweiten Bildes entspricht, wird "Stimmt" in der Konsole ausgegeben
-    console.log("Stimmt");
-  }else {
-    console.log("Stimmt nicht");
+  if (cardCounter == 2) {
+    if (firstCard.getAttribute("realImageSource") == secondCard.getAttribute("realImageSource")) { // Wenn die "realImageSource"-Eigenschaft des ersten Bildes der "realImageSource"-Eigenschaft des zweiten Bildes entspricht, wird "Stimmt" in der Konsole ausgegeben
+      console.log("Stimmt");
+    } else {
+      console.log("Stimmt nicht");
 
-    setTimeout(() => {  // wenn es nicht übereinstimmt,  wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird
-      imgFrontFace.setAttribute("src", "questionMark.png");  // -> die Funktion ändert das bild wieder zum 2.Bild (questionmark)
+      setTimeout(() => {  // wenn es nicht übereinstimmt,  wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird
+        imgFrontFace.setAttribute("src", "questionMark.png");  // -> die Funktion ändert das bild wieder zum 2.Bild (questionmark)
 
-    }, 1000); // in Variable verändern   
+      }, 1000); // in Variable verändern   
 
-    for(let i = 0;i<bildArray.length; i++) {
-      if(firstCard == bildArray[i]) { // Schauen wo firstCard im BildArray gespeichert ist. An welcher Position. Da nichtmehr auf imgFrontFace von erster Karte zugegriffen werden kann
-        setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
-          bildArray[i].setAttribute("src", "questionMark.png");  // An Position wo firstCard in BildArray ist soll die erste Karte auf das Fragezeichen  zurückgesetzt werden
-    
-        }, 1000);
+      for (let i = 0; i < bildArray.length; i++) {
+        if (firstCard == bildArray[i]) { // Schauen wo firstCard im BildArray gespeichert ist. An welcher Position. Da nichtmehr auf imgFrontFace von erster Karte zugegriffen werden kann
+          setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
+            bildArray[i].setAttribute("src", "questionMark.png");  // An Position wo firstCard in BildArray ist soll die erste Karte auf das Fragezeichen  zurückgesetzt werden
+
+          }, 1000);
+        }
       }
-    }
 
+    }
   }
-}
 
 
 }
 
 
 function shuffle(array) {
-  let currentIndex = array.length,  randomIndex;
+  let currentIndex = array.length, randomIndex;
 
   // While there remain elements to shuffle.
   while (currentIndex != 0) {
@@ -277,22 +198,3 @@ cards.forEach((card) => card.addEventListener("click", flipCard));
 resetButton.addEventListener("click", () => {
   location.reload();
 });
-
-// Get the timer element
-/* var timerElement = document.getElementById("timer");
-
-// Function to start the timer
-function startTimer() {
-  var seconds = 0;
-  setInterval(function () {
-    seconds++;
-    timerElement.textContent = "Time: " + seconds + "s";
-  }, 1000);
-}
-
-// Call the startTimer function whenever a card is flipped
-
-for (var i = 0; i < cards.length; i++) {
-  cards[i].addEventListener("click", startTimer);
-}
-*/

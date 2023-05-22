@@ -61,9 +61,3 @@
   background-color: red;      Setzt den Hintergrund der Karte auf Rot, wenn sie falsch erraten wurde 
 }
 */
-
-#timer {
-  text-align: center;   /* Align the text in the center */
-  font-size: 24px;      /* Adjust the font size */
-  color:black;          /* Set the text color */
-}
