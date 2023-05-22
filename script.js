@@ -149,7 +149,7 @@ for(let y= 0; y<items.length; y++) { //Alle Elemente von items werden in ItemsDo
 }
 }
 //Randomize Array
-shuffle(itemsDouble); //Shuffle funktionion wird mit dem Array itemsDOuble aufgerufen. itemsDouble wird so in der FUnktion randomisiert
+shuffle(itemsDouble); //Shuffle funktion wird mit dem Array itemsDouble aufgerufen. itemsDouble wird so in der FUnktion randomisiert
 
   for(let i = 0 ; i< itemsDouble.length; i++) { //For schleife mir länge von items Double. Items von ItemsDouble werden in de Webseite ins HTML reingeladen
   let cardClass = document.createElement("div"); //Div erstellt
@@ -175,41 +175,41 @@ shuffle(itemsDouble); //Shuffle funktionion wird mit dem Array itemsDOuble aufge
   }
 }
 
-function flipCard(imgFrontFace) {
-  imgFrontFace.setAttribute("src", imgFrontFace.getAttribute("realImageSource"));
+function flipCard(imgFrontFace) { //Bild wird angeklickt -> Funktion flipCard wird aufgerufen -> imgFrontFace ist das angeklickte Bild und wird an Funktion weitergegeben
+  imgFrontFace.setAttribute("src", imgFrontFace.getAttribute("realImageSource")); // -> hier verändern wir von questionmark zum richtigen Bild  ->setzt die "src"-Eigenschaft des Bildes auf den Wert der "realImageSource"-Eigenschaft (enthält den  Pfad zur eigentlichen Bildquelle) ((sonst ist es nur das questionmark))
 
-  cardCounter++;
-  if(cardCounter == 1) {
-    firstCard = imgFrontFace
+  cardCounter++; // Der Wert von "cardCounter" wird um eins erhöht -> "cardCounter" verfolgt+prüft ob es sich um die erste oder zweite Karte handelt 
+  if(cardCounter == 1) { //Wenn "cardCounter" gleich 1 ist, wird der folgende Codeblock ausgeführt
+    firstCard = imgFrontFace //speichert imgFrontface in die Variable 
     console.log(firstCard);
 
-  } else if (cardCounter == 2) {
-    secondCard = imgFrontFace
+  } else if (cardCounter == 2) { //Wenn "cardCounter" gleich 2 ist, wird der folgende Codeblock ausgeführt
+    secondCard = imgFrontFace //speichert imgFrontFace in die 2. Variable
     console.log(secondCard);
 
-  } else {
-    cardCounter = 1;
+  } else { //Wenn "cardCounter" weder 1 noch 2 ist, wird der folgende Codeblock ausgeführt -> das Spiel wird auf den Anfangszustand zurückgesetzt  + "cardCounter" auf 1 gesetzt und "secondCard" auf "null" gesetzt
+    cardCounter = 1; // die 3. Karte basically ist wieder die erste, weil die beiden davor schon überprüft wurden 
     firstCard = imgFrontFace
     console.log(firstCard);
 
-    secondCard = null;
+    secondCard = null; // die zweite Karte von davor wird entfernt 
   }
 
   if(cardCounter == 2) {
-  if(firstCard.getAttribute("realImageSource") == secondCard.getAttribute("realImageSource")) {
+  if(firstCard.getAttribute("realImageSource") == secondCard.getAttribute("realImageSource")) { // Wenn die "realImageSource"-Eigenschaft des ersten Bildes der "realImageSource"-Eigenschaft des zweiten Bildes entspricht, wird "Stimmt" in der Konsole ausgegeben
     console.log("Stimmt");
   }else {
     console.log("Stimmt nicht");
 
-    setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
-      imgFrontFace.setAttribute("src", "questionMark.png");
+    setTimeout(() => {  // wenn es nicht übereinstimmt,  wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird
+      imgFrontFace.setAttribute("src", "questionMark.png");  // -> die Funktion ändert das bild wieder zum 2.Bild (questionmark)
 
-    }, 1000);
+    }, 1000); // in Variable verändern   
 
     for(let i = 0;i<bildArray.length; i++) {
-      if(firstCard == bildArray[i]) {
+      if(firstCard == bildArray[i]) { // Schauen wo firstCard im BildArray gespeichert ist. An welcher Position. Da nichtmehr auf imgFrontFace von erster Karte zugegriffen werden kann
         setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
-          bildArray[i].setAttribute("src", "questionMark.png");
+          bildArray[i].setAttribute("src", "questionMark.png");  // An Position wo firstCard in BildArray ist soll die erste Karte auf das Fragezeichen  zurückgesetzt werden
     
         }, 1000);
       }
@@ -229,7 +229,7 @@ function shuffle(array) {
   while (currentIndex != 0) {
 
     // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
+    randomIndex = Math.floor(Math.random() * currentIndex);  // Math.random -> 0 bis 1 
     currentIndex--;
 
     // And swap it with the current element.
@@ -253,3 +253,22 @@ cards.forEach((card) => card.addEventListener("click", flipCard));
 resetButton.addEventListener("click", () => {
   location.reload();
 });
+
+// Get the timer element
+/* var timerElement = document.getElementById("timer");
+
+// Function to start the timer
+function startTimer() {
+  var seconds = 0;
+  setInterval(function () {
+    seconds++;
+    timerElement.textContent = "Time: " + seconds + "s";
+  }, 1000);
+}
+
+// Call the startTimer function whenever a card is flipped
+
+for (var i = 0; i < cards.length; i++) {
+  cards[i].addEventListener("click", startTimer);
+}
+*/
