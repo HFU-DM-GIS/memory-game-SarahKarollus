@@ -64,7 +64,31 @@ function resetTimer() {
 }
 
 */ //Timer versuch 2 Ende
+// Timer versuch 3
+function startTimer() {
+  timerInterval = setInterval(() => {
+    seconds++;
+    displayTimer();
+  }, 1000);
+}
 
+function displayTimer() {
+  const minutes = Math.floor(seconds / 60);
+  const formattedSeconds = String(seconds % 60).padStart(2, "0");
+  document.getElementById("timer").textContent = `Time: ${minutes}:${formattedSeconds}`;
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+function resetTimer() {
+  stopTimer();
+  seconds = 0;
+  displayTimer();
+}
+
+// Timerversuch 3 Ende
 
 /* API einbinden
 
