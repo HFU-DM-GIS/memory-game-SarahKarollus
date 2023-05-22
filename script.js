@@ -5,12 +5,15 @@ const memoryGame = document.getElementById("memoryGame"); // Select the containe
 //  const accessKey = Ht2EK3qiirwzPCh48aA6O5tmuHaH3MMeaM51QLZcNJE; // Access Key
 
 let cardNumber = 6;
-let firstCardofDeck;
-let secondCardofDeck;
+let firstCard;
+let secondCard;
 let cardCounter = 0;
 let bildArray = [];
+
+
 let timerinterval;
 let seconds = 0;
+
 // Anzahl der Karten ändern:
 
 /* API einbinden
@@ -57,7 +60,7 @@ let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
     document.getElementById("timer").innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
   };
 
-  setInterval(timeGenerator, 1000);
+setInterval(timeGenerator, 1000);
 
 */
 // Timer versuch 1 Ende
@@ -93,6 +96,13 @@ function resetTimer() {
 
 */ //Timer versuch 2 Ende
 
+
+
+const options = [
+  { label: "6 Karten", value: 6 },
+  { label: "8 Karten", value: 8 },
+  { label: "12 Karten", value: 12 },
+];
 
 //Laden wir Karten
 loadCards();
@@ -134,43 +144,43 @@ shuffle(itemsDouble); //Shuffle funktionion wird mit dem Array itemsDOuble aufge
   }
 }
 
-function flipCard(imgFrontFace) {
-  imgFrontFace.setAttribute("src", imgFrontFace.getAttribute("realImageSource"));
+function flipCard(imgFrontFace) { //Bild wird angeklickt -> Funktion flipCard wird aufgerufen -> imgFrontFace ist das angeklickte Bild und wird an Funktion weitergegeben
+  imgFrontFace.setAttribute("src", imgFrontFace.getAttribute("realImageSource")); // -> hier verändern wir von questionmark zum richtigen Bild  ->setzt die "src"-Eigenschaft des Bildes auf den Wert der "realImageSource"-Eigenschaft (enthält den  Pfad zur eigentlichen Bildquelle) ((sonst ist es nur das questionmark))
 
-  cardCounter++;
-  if(cardCounter == 1) {
-    firstCard = imgFrontFace
+  cardCounter++;       // Der Wert von "cardCounter" wird um eins erhöht -> "cardCounter" verfolgt+prüft ob es sich um die erste oder zweite Karte handelt 
+  if(cardCounter == 1) {     //Wenn "cardCounter" gleich 1 ist, wird der folgende Codeblock ausgeführt
+    firstCard = imgFrontFace //speichert imgFrontface in die Variable 
     console.log(firstCard);
 
-  } else if (cardCounter == 2) {
-    secondCard = imgFrontFace
+  } else if (cardCounter == 2) {    //Wenn "cardCounter" gleich 2 ist, wird der folgende Codeblock ausgeführt
+    secondCard = imgFrontFace //speichert imgFrontFace in die 2. Variable
     console.log(secondCard);
 
-  } else {
-    cardCounter = 1;
+  } else { //Wenn "cardCounter" weder 1 noch 2 ist, wird der folgende Codeblock ausgeführt -> das Spiel wird auf den Anfangszustand zurückgesetzt  + "cardCounter" auf 1 gesetzt und "secondCard" auf "null" gesetzt
+    cardCounter = 1; // die 3. Karte basically ist wieder die erste, weil die beiden davor schon überprüft wurden 
     firstCard = imgFrontFace
     console.log(firstCard);
 
-    secondCard = null;
+    secondCard = null; // die zweite Karte von davor wird entfernt 
   }
 
-  if(cardCounter == 2) {
-  if(firstCard.getAttribute("realImageSource") == secondCard.getAttribute("realImageSource")) {
-    console.log("Stimmt");
+  if(cardCounter == 2) { 
+  if(firstCard.getAttribute("realImageSource") == secondCard.getAttribute("realImageSource")) { // Wenn die "realImageSource"-Eigenschaft des ersten Bildes der "realImageSource"-Eigenschaft des zweiten Bildes entspricht, wird "Stimmt" in der Konsole ausgegeben
+    console.log("Stimmt"); 
   }else {
     console.log("Stimmt nicht");
 
-    setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
-      imgFrontFace.setAttribute("src", "questionMark.png");
+    setTimeout(() => {  // wenn es nicht übereinstimmt,  wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird
+      imgFrontFace.setAttribute("src", "questionMark.png");  // -> die Funktion ändert das bild wieder zum 2.Bild (questionmark)
 
-    }, 2000);
+    }, 1000);
 
-    for(let i = 0;i<bildArray.length; i++) {
-      if(firstCard == bildArray[i]) {
+    for(let i = 0;i<bildArray.length; i++) { 
+      if(firstCard == bildArray[i]) { // Schauen wo firstCard im BildArray gespeichert ist. An welcher Position. Da nichtmehr auf imgFrontFace von erster Karte zugegriffen werden kann
         setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
-          bildArray[i].setAttribute("src", "questionMark.png");
+          bildArray[i].setAttribute("src", "questionMark.png");    // An Position wo firstCard in BildArray ist soll die erste Karte auf das Fragezeichen  zurückgesetzt werden
     
-        }, 2000);
+        }, 1000);
       }
     }
 
