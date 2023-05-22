@@ -3,12 +3,84 @@ const resetButton = document.querySelector("#reset"); // Selektiere das Element 
 const cardCountSelect = document.getElementById("card-count"); // Selektiere das Dropdown-Menü
 const memoryGame = document.getElementById("memoryGame"); // Selektiere den Container für die Karten
 let numberOfCards = 6;
-let firstCardofDeck;
-let secondCardofDeck;
+let firstCard;
+let secondCard;
 let cardCounter = 0;
 let bildArray = [];
 
+// let timerinterval;
+// let seconds = 0;
 
+/* Timer versuch 1
+let seconds = 0,
+minutes = 0;
+
+const timeGenerator = () => {
+  seconds += 1;
+  if (seconds >= 60) {
+    minutes += 1;
+    seconds = 0;
+  }
+
+//format time before displaying 
+
+let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
+    let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
+    document.getElementById("timer").innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
+  };
+
+setInterval(timeGenerator, 1000);
+
+*/
+// Timer versuch 1 Ende
+
+/*Timer versuch 2
+
+//Timer wird gestartet
+function startTimer() { 
+  timerInterval = setInterval(() => {
+    seconds++;
+    displayTimer();
+  }, 1000);
+}
+
+// Timer wird angezeigt
+function displayTimer() {
+  const minutes = Math.floor(seconds / 60);
+  const formattetSeconds = String(seconds % 60).padStart(2, "0");
+  document.getElementById("timer").textContent = `Time: ${minutes}:${formattetSeconds}`;
+}
+
+// Timer wird gestoppt
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+// Timer wird zurückgesetzt
+function resetTimer() {
+  stopTimer();
+  seconds = 0;
+  displayTimer();
+}
+
+*/ //Timer versuch 2 Ende
+
+
+/* API einbinden
+
+cards.forEach(card => {
+  fetch('https://api.unsplash.com/photos/random?client_id=' + accessKey)
+    .then(response => response.json())
+    .then(data => {
+      const imageUrl = data.urls.regular; // Passe dies entsprechend an, um die gewünschte Bildgröße zu erhalten
+      card.style.backgroundImage = `url(${imageUrl})`;
+    })
+    .catch(error => {
+      // Behandle Fehler bei der API-Anfrage
+      console.log(error);
+    });
+});
+*/
 
 // Anzahl der Karten ändern:
 cardCountSelect.addEventListener("change", (event) => {
@@ -132,14 +204,14 @@ function flipCard(imgFrontFace) {
     setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
       imgFrontFace.setAttribute("src", "questionMark.png");
 
-    }, 2000);
+    }, 1000);
 
     for(let i = 0;i<bildArray.length; i++) {
       if(firstCard == bildArray[i]) {
         setTimeout(() => {  // es wird ein Timer von 1000 ms gestartet bevor die Funktion fortgesetzt wird.
           bildArray[i].setAttribute("src", "questionMark.png");
     
-        }, 2000);
+        }, 1000);
       }
     }
 
