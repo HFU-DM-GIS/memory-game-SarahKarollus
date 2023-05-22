@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 const cards = document.querySelectorAll(".card");  // Select all elements with the class "card"
 const resetButton = document.querySelector("#reset"); // Select the element with the ID "reset"
 const cardCountSelect = document.getElementById("card-count"); // Select the dropdown menu
@@ -6,14 +5,6 @@ const memoryGame = document.getElementById("memoryGame"); // Select the containe
 //  const accessKey = Ht2EK3qiirwzPCh48aA6O5tmuHaH3MMeaM51QLZcNJE; // Access Key
 
 let cardNumber = 6;
-=======
-const cards = document.querySelectorAll(".card");  // Selektiere alle Elemente mit der Klasse "card"
-const resetButton = document.querySelector("#reset"); // Selektiere das Element mit der ID "reset"
-const cardCountSelect = document.getElementById("card-count"); // Selektiere das Dropdown-Menü
-const memoryGame = document.getElementById("memoryGame"); // Selektiere den Container für die Karten
-// const accessKey = Ht2EK3qiirwzPCh48aA6O5tmuHaH3MMeaM51QLZcNJE; // Access Key
-let numberOfCards = 6;
->>>>>>> Stashed changes
 let firstCard;
 let secondCard;
 let cardCounter = 0;
@@ -24,16 +15,6 @@ let timerinterval;
 let seconds = 0;
 
 // Anzahl der Karten ändern:
-cardCountSelect.addEventListener("change", (event) =>  {
-if(event.target.value == 6) {
-  numberOfCards = 6;
-}else if (event.target.value == 8) {
-  numberOfCards = 8;
-}else if (event.target.value = 12) {
-  numberOfCards = 12;
-}
-changeNumberofCards();
-});
 
 /* API einbinden
 
@@ -52,25 +33,14 @@ cards.forEach(card => {
 */
 
   // Arrayliste mit den Karten 
-    let allItems = [
+    const items = [
     {name: "Spongebob und Patrick als Steaks", image: "spongebob_meat.png"},
     {name: "Spongebob mit fancy Kleid", image: "spongebob_princess.png"}, 
     {name: "Spongebob mit fancy Brille", image: "spongebob_sunglasses.png"}, 
     {name: "Squidward macht Selfie", image: "Squidward.png"},
     {name: "Spongebob im Kostüm", image: "spongebob_costume.png"},
     {name: "Spongebob mit Blume", image: "spongebob_flower.png"},
-
-    {name: "Spongebob und Patrick als Steaks", image: "spongebob_meat.png"}, // neue bilder einfügen 
-    {name: "Spongebob mit fancy Kleid", image: "spongebob_princess.png"}, 
-    {name: "Spongebob mit fancy Brille", image: "spongebob_sunglasses.png"}, 
-    {name: "Squidward macht Selfie", image: "Squidward.png"},
-    {name: "Spongebob im Kostüm", image: "spongebob_costume.png"},
-    {name: "Spongebob mit Blume", image: "spongebob_flower.png"},
   ];
-  let items = [
-      ];
-      let itemsDouble = [
-      ];
 
 /* Timer versuch 1
 let seconds = 0,
@@ -93,7 +63,6 @@ let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
 setInterval(timeGenerator, 1000);
 
 */
-<<<<<<< Updated upstream
 // Timer versuch 1 Ende
 
 /*Timer versuch 2
@@ -134,25 +103,9 @@ const options = [
   { label: "8 Karten", value: 8 },
   { label: "12 Karten", value: 12 },
 ];
-=======
-changeNumberofCards(); //funktion aufgerufen
->>>>>>> Stashed changes
 
 //Laden wir Karten
-
-function changeNumberofCards () { //funktion ausgeführt 
-items = [];
-for(i = 0; i<numberOfCards; i++) {
-  items.push(allItems[i]);
-}
-while (memoryGame.firstChild) {
-  memoryGame.removeChild(memoryGame.lastChild);
-}
 loadCards();
-
-}
-
-
 
 
 

@@ -45,7 +45,6 @@
 
 .flipped {
   display: block;       /* Zeigt den Inhalt der Karte an, wenn sie umgedreht ist */
-<<<<<<< Updated upstream
 }
  
 
@@ -67,6 +66,4 @@
   text-align: center;   /* Align the text in the center */
   font-size: 24px;      /* Adjust the font size */
   color:black;          /* Set the text color */
-=======
->>>>>>> Stashed changes
 }
