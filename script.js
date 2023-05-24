@@ -8,24 +8,36 @@ let firstCard;
 let secondCard;
 let cardCounter = 0;
 let bildArray = [];
+let allItems = []; //// Arrayliste mit den Karten 
+let items = [];
+let itemsDouble = [];
+const requestUrl =
+      'https://api.unsplash.com/search/photos?query=london&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
 
 
 // API einbinden
 
+async function getAllItems() {
+  for(let i= 0; i<12; i++) {
+  let randomImage = await getNewImage();
+  allItems.push({name: "image" +i, image: randomImage});
+  // console.log(allItems);
+  }
+}
+async function getNewImage() {
+  let randomNumber = Math.floor(Math.random() * 10);
+  let randomPage = Math.floor(Math.random() * 3);
+  let pageUrl = requestUrl + '&page=' + randomPage;
+  console.log(randomPage);
 
-
-  cards.forEach(card=> {
-  fetch('https://api.unsplash.com/photos/random?client_id='+ accessKey)
-    .then(response => response.json())
-    .then(data => {
-      const imageUrl = data.urls.regular; // Passe dies entsprechend an, um die gewünschte Bildgröße zu erhalten
-      card.style.backgroundImage = `url(${imageUrl})`;
-    })
-    .catch(error => {
-      // Behandle Fehler bei der API-Anfrage
-      console.log(error);
+  return fetch(pageUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      let allImages = data.results[randomNumber];
+      return allImages.urls.regular;
     });
-});
+   
+}
 
 
 
@@ -43,38 +55,14 @@ cardCountSelect.addEventListener("change", (event) => {
 });
 
 
-//function selectChange()
-
-
-// Arrayliste mit den Karten 
-let allItems = [
-  { name: "Spongebob und Patrick als Steaks", image: "spongebob_meat.png" },
-  { name: "Spongebob mit fancy Kleid", image: "spongebob_princess.png" },
-  { name: "Spongebob mit fancy Brille", image: "spongebob_sunglasses.png" },
-  { name: "Squidward macht Selfie", image: "Squidward.png" },
-  { name: "Spongebob im Kostüm", image: "spongebob_costume.png" },
-  { name: "Spongebob mit Blume", image: "spongebob_flower.png" },
-
-  { name: "Spongebob und Patrick als Steaks", image: "spongebob_meat.png" },
-  { name: "Spongebob mit fancy Kleid", image: "spongebob_princess.png" },
-  { name: "Spongebob mit fancy Brille", image: "spongebob_sunglasses.png" },
-  { name: "Squidward macht Selfie", image: "Squidward.png" },
-  { name: "Spongebob im Kostüm", image: "spongebob_costume.png" },
-  { name: "Spongebob mit Blume", image: "spongebob_flower.png" },
-];
-let items = [
-];
-let itemsDouble = [
-];
-
 changeNumberOfCards();
 
 
 
 //Laden wir Karten
 
-
-function changeNumberOfCards() {
+async function changeNumberOfCards() {
+  await getAllItems();
   items = [];
   for (i = 0; i < numberOfCards; i++) {
     items.push(allItems[i]);
@@ -82,6 +70,7 @@ function changeNumberOfCards() {
   while (memoryGame.firstChild) {
     memoryGame.removeChild(memoryGame.lastChild);
   }
+  console.log(items)
   loadCards();
 
 }
