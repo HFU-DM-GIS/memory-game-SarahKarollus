@@ -2,7 +2,8 @@ const cards = document.querySelectorAll(".card");  // Selektiere alle Elemente m
 const resetButton = document.querySelector("#reset"); // Selektiere das Element mit der ID "reset"
 const cardCountSelect = document.getElementById("card-count"); // Selektiere das Dropdown-Menü
 const memoryGame = document.getElementById("memoryGame"); // Selektiere den Container für die Karten
-const accessKey = 'E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0'; // Access Key
+const buttonSearch = document.getElementById("buttonSearch"); 
+const searchInput = document.getElementById("theme");
 let numberOfCards = 6;
 let firstCard;
 let secondCard;
@@ -11,11 +12,21 @@ let bildArray = [];
 let allItems = []; //// Arrayliste mit den Karten 
 let items = [];
 let itemsDouble = [];
-const requestUrl =
-      'https://api.unsplash.com/search/photos?query=london&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
+let search = "dog";
+let requestUrl =
+      'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
 
 
-// API einbinden
+buttonSearch.addEventListener("click", changeSearch);
+
+      function changeSearch() {
+        console.log(searchInput.value);
+        search = searchInput.value;
+        requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
+        allItems = [];
+      changeNumberOfCards();
+      }
+      
 
 async function getAllItems() {
   for(let i= 0; i<12; i++) {
