@@ -52,17 +52,3 @@ body {
   display: block;       /* Zeigt den Inhalt der Karte an, wenn sie umgedreht ist */
 }
  
-
-/* 
-.selected {
-  border: black solid 2px;    Setzt eine schwarze Linie mit 5 Pixel Breite um die ausgewählte Karte 
-} 
-
-.correct {
-  background-color: green;    Setzt den Hintergrund der Karte auf Grün, wenn sie korrekt erraten wurde 
-}
-
-.incorrect {
-  background-color: red;      Setzt den Hintergrund der Karte auf Rot, wenn sie falsch erraten wurde 
-}
-*/

@@ -1,24 +1,26 @@
-const cards = document.querySelectorAll(".card");  // Selektiere alle Elemente mit der Klasse "card"
-const resetButton = document.querySelector("#reset"); // Selektiere das Element mit der ID "reset"
-const cardCountSelect = document.getElementById("card-count"); // Selektiere das Dropdown-Menü
-const memoryGame = document.getElementById("memoryGame"); // Selektiere den Container für die Karten
-const buttonSearch = document.getElementById("buttonSearch"); 
-const searchInput = document.getElementById("theme");
-let numberOfCards = 6;
-let firstCard;
-let secondCard;
-let cardCounter = 0;
-let bildArray = [];
-let allItems = []; //// Arrayliste mit den Karten 
-let items = [];
-let itemsDouble = [];
-let search = "dog";
+const cards = document.querySelectorAll(".card");  // Selektiert alle Elemente mit der Klasse "card" und speichert sie in der Variable cards 
+const resetButton = document.querySelector("#reset"); // Selektiert das Element mit der ID "reset" und speichert sie in der Variable "resetButton"
+const cardCountSelect = document.getElementById("card-count"); // Selektiert das Dropdown-Menü und speichert es in der Variable "cardCountSelect" -> ermöglicht dem Spieler, die Anzahl der Karten im Spiel auszuwählen.
+const memoryGame = document.getElementById("memoryGame"); // Selektiert den Container für die Karten mit der ID "memoryGame" und speichert in der Variable "memoryGame"
+const buttonSearch = document.getElementById("buttonSearch"); //Element mit der ID "buttonSearch" wird ausgewählt und in der Variable buttonSearch gespeichert (dies Element repräsentiert den Suchbutton für die Bilder von Unsplash)
+const searchInput = document.getElementById("theme"); // Eingabefeld mit der ID "theme" wird ausgewählt und in der Variable searchInput gespeichert. In diesem Eingabefeld kann der Spieler ein Suchthema für die Bilder eingeben.
+let numberOfCards = 6; //Variable numberOfCards wird mit dem Wert 6 initialisiert. Diese Variable speichert die aktuelle Anzahl der Karten AM ANFANG des Spiels.
+let firstCard; //Variable firstCard wird deklariert, um die erste umgedrehte Karte im Spiel zu speichern
+let secondCard; //Variable secondCard wird deklariert, um die zweite umgedrehte Karte im Spiel zu speichern
+let cardCounter = 0; //Variable cardCounter wird initialisiert und auf 0 gesetzt (Keine Karte ist am Anfang aussgewählt -> alle zeigen noch das Fragezeichen) Diese Variable wird verwendet, um zu verfolgen, ob es sich um die erste oder zweite umgedrehte Karte handelt.
+let bildArray = []; // leeres Array bildArray wird erstellt. In diesem Array werden die Image-Elemente der Karten gespeichert
+let allItems = []; // leeres Array allItems wird erstellt. In diesem Array werden alle Bilder aus der Unsplash-API gespeichert.
+let items = []; //leeres Array items wird erstellt. In diesem Array werden die ausgewählten Bilder für das aktuelle Spiel gespeichert.
+let itemsDouble = []; //eeres Array itemsDouble wird erstellt. In diesem Array werden die doppelten Bilder (weil Memory) für das aktuelle Spiel gespeichert.
+let search = "dog"; //Variable search wird mit dem anfänglichen Suchthema "dog" initialisiert. Dieses Suchthema wird verwendet, um Bilder von Unsplash abzurufen.
 let requestUrl =
       'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
+      //Variable requestUrl wird erstellt, die die URL für die API-Anfrage an Unsplash enthält. Das Suchthema wird in die URL eingefügt.
 
 
-buttonSearch.addEventListener("click", changeSearch);
+buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft
 
+//Funktion changeSearch wird definiert. Diese Funktion wird aufgerufen, wenn der Suchbutton geklickt wird. Sie liest den Wert aus dem Sucheingabefeld und aktualisiert das Suchthema und die requestUrl für die API-Anfrage.
       function changeSearch() {
         console.log(searchInput.value);
         search = searchInput.value;
@@ -26,20 +28,23 @@ buttonSearch.addEventListener("click", changeSearch);
         allItems = [];
       changeNumberOfCards();
       }
+     
       
-
-async function getAllItems() {
+//Funktion getAllItems wird definiert. Diese Funktion ruft Bilder von Unsplash ab und speichert sie im Array allItems.
+async function getAllItems() { 
   for(let i= 0; i<12; i++) {
   let randomImage = await getNewImage();
   allItems.push({name: "image" +i, image: randomImage});
   // console.log(allItems);
   }
 }
+//Funktion getNewImage wird definiert. Diese Funktion ruft ein zufälliges Bild von Unsplash basierend auf dem aktuellen Suchthema ab und gibt die URL des Bildes zurück
 async function getNewImage() {
   let randomNumber = Math.floor(Math.random() * 10);
   let randomPage = Math.floor(Math.random() * 3);
   let pageUrl = requestUrl + '&page=' + randomPage;
   console.log(randomPage);
+
 
   return fetch(pageUrl)
     .then((response) => response.json())
@@ -52,8 +57,7 @@ async function getNewImage() {
 
 
 
-
-// Anzahl der Karten ändern:
+// Event Listener wird hinzugefügt, der auf Änderungen im Dropdown-Menü für die Anzahl der Karten reagiert. Wenn sich die Auswahl ändert, wird die Funktion changeNumberOfCards aufgerufen.
 cardCountSelect.addEventListener("change", (event) => {
   if (event.target.value == 6) {
     numberOfCards = 6;
@@ -66,12 +70,12 @@ cardCountSelect.addEventListener("change", (event) => {
 });
 
 
-changeNumberOfCards();
+changeNumberOfCards(); //Funktion changeNumberOfCards wird aufgerufen, um das Spiel mit der ursprünglich ausgewählten Anzahl von Karten zu starten
 
 
 
-//Laden wir Karten
 
+//Funktion changeNumberOfCards wird definiert. Diese Funktion ändert die Anzahl der Karten im Spiel basierend auf der ausgewählten Option im Dropdown-Menü. Sie ruft auch die Funktion getAllItems auf, um neue Bilder von Unsplash abzurufen und die Karten zu laden
 async function changeNumberOfCards() {
   await getAllItems();
   items = [];
@@ -86,7 +90,7 @@ async function changeNumberOfCards() {
 
 }
 
-
+//Funktion loadCards wird definiert. Diese Funktion lädt die Karten in den Spielbereich (memoryGame) basierend auf den ausgewählten Bildern
 function loadCards() {
   itemsDouble = []; // Array erstellt, wo alles verdoppelt wird
   console.log(itemsDouble);
@@ -123,6 +127,7 @@ function loadCards() {
   }
 }
 
+//Funktion flipCard wird definiert. Diese Funktion wird aufgerufen, wenn eine Karte angeklickt wird. Sie dreht die Karte um und überprüft, ob zwei umgedrehte Karten übereinstimmen oder nicht.
 function flipCard(imgFrontFace) { //Bild wird angeklickt -> Funktion flipCard wird aufgerufen -> imgFrontFace ist das angeklickte Bild und wird an Funktion weitergegeben
   imgFrontFace.setAttribute("src", imgFrontFace.getAttribute("realImageSource")); // -> hier verändern wir von questionmark zum richtigen Bild  ->setzt die "src"-Eigenschaft des Bildes auf den Wert der "realImageSource"-Eigenschaft (enthält den  Pfad zur eigentlichen Bildquelle) ((sonst ist es nur das questionmark))
 
@@ -170,7 +175,7 @@ function flipCard(imgFrontFace) { //Bild wird angeklickt -> Funktion flipCard wi
 
 }
 
-
+//Funktion shuffle wird definiert. Diese Funktion mischt ein Array zufällig
 function shuffle(array) {
   let currentIndex = array.length, randomIndex;
 
@@ -188,14 +193,14 @@ function shuffle(array) {
 
   return array;
 }
-// Setzt die Variablen für das Umdrehen der Karten zurück
+// Setzt die Variablen für das Umdrehen der Karten zurück 
 function resetBoard() {
   [flippedCard, lockBoard] = [false, false];
   [firstCard, secondCard] = [null, null];
 }
 
 
-// Fügt einen Event Listener für das Umkehren der Karten hinzu
+// Event Listener wird hinzugefügt, der auf den Klick einer Karte reagiert und die Funktion flipCard aufruft
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
 // Fügt einen Event Listener für den "Reset" Button hinzu, der die Seite neu lädt
