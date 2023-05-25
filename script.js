@@ -11,38 +11,38 @@ let cardCounter = 0; //Variable cardCounter wird initialisiert und auf 0 gesetzt
 let bildArray = []; // leeres Array bildArray wird erstellt. In diesem Array werden die Image-Elemente der Karten gespeichert
 let allItems = []; // leeres Array allItems wird erstellt. In diesem Array werden alle Bilder aus der Unsplash-API gespeichert.
 let items = []; //leeres Array items wird erstellt. In diesem Array werden die ausgewählten Bilder für das aktuelle Spiel gespeichert.
-let itemsDouble = []; //eeres Array itemsDouble wird erstellt. In diesem Array werden die doppelten Bilder (weil Memory) für das aktuelle Spiel gespeichert.
+let itemsDouble = []; //leeres Array itemsDouble wird erstellt. In diesem Array werden die doppelten Bilder (weil Memory) für das aktuelle Spiel gespeichert.
 let search = "dog"; //Variable search wird mit dem anfänglichen Suchthema "dog" initialisiert. Dieses Suchthema wird verwendet, um Bilder von Unsplash abzurufen.
 let requestUrl =
       'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
       //Variable requestUrl wird erstellt, die die URL für die API-Anfrage an Unsplash enthält. Das Suchthema wird in die URL eingefügt.
 
 
-buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft
+buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
 
-//Funktion changeSearch wird definiert. Diese Funktion wird aufgerufen, wenn der Suchbutton geklickt wird. Sie liest den Wert aus dem Sucheingabefeld und aktualisiert das Suchthema und die requestUrl für die API-Anfrage.
-      function changeSearch() {
-        console.log(searchInput.value);
-        search = searchInput.value;
+//Funktion changeSearch wird definiert. Diese Funktion wird aufgerufen, wenn der Suchbutton geklickt wird(weil EventListener) ->  liest den Wert aus dem Sucheingabefeld und aktualisiert das Suchthema und die requestUrl für die API-Anfrage.
+      function changeSearch() { //wichtig für die API -Anfrage
+        console.log(searchInput.value); //zeigt auf der Konsole das Thema, was gesucht wurde
+        search = searchInput.value; 
         requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
-        allItems = [];
-      changeNumberOfCards();
+        allItems = []; //listen dann die ganzen Items, die in Frage kommen
+      changeNumberOfCards(); 
       }
      
       
 //Funktion getAllItems wird definiert. Diese Funktion ruft Bilder von Unsplash ab und speichert sie im Array allItems.
-async function getAllItems() { 
-  for(let i= 0; i<12; i++) {
-  let randomImage = await getNewImage();
-  allItems.push({name: "image" +i, image: randomImage});
+async function getAllItems() { //Funktion getAllItems wird definiert (verwendet den Asynchron-Modifikator async ) -> bedeutet, dass die Funktion asynchronen Code enthält und auf asynchrone Operationen (Netzwerkanfragen) zugreift
+  for(let i= 0; i<=12; i++) { //for-Schleife wird verwendet, um 12 Wiederholungen durchzuführen. Der Schleifenindex i wird von 0 bis 12 inkrementiert
+  let randomImage = await getNewImage(); // in jedem Schleifendurchlauf wird die Funktion getNewImage() aufgerufen und das Ergebnis in der Variablen randomImage gespeichert. Das Schlüsselwort await wird verwendet, um die asynchrone Funktion getNewImage() zu pausieren und auf das Ergebnis zu warten, bevor es fortgesetzt wird
+  allItems.push({name: "image" +i, image: randomImage}); //Objekt {name: "image" +i, image: randomImage} wird zum Array allItems hinzugefügt (Objekt enthält zwei Eigenschaften: name und image) Der Wert der name-Eigenschaft wird als "image" zusammen mit dem aktuellen Schleifenindex i festgelegt, um ein eindeutigen Namen für jedes Bild zu generieren. Der Wert der image-Eigenschaft ist das zufällig abgerufene Bild (randomImage)
   // console.log(allItems);
   }
 }
 //Funktion getNewImage wird definiert. Diese Funktion ruft ein zufälliges Bild von Unsplash basierend auf dem aktuellen Suchthema ab und gibt die URL des Bildes zurück
-async function getNewImage() {
-  let randomNumber = Math.floor(Math.random() * 10);
-  let randomPage = Math.floor(Math.random() * 3);
-  let pageUrl = requestUrl + '&page=' + randomPage;
+async function getNewImage() { 
+  let randomNumber = Math.floor(Math.random() * 10); //10 Bilder von einer Seite werden gepickt
+  let randomPage = Math.floor(Math.random() * 3); //3 Seiten stehen zur Verfügung (wichtig hier wenig zu haben, weils sonst zu lange lädt)
+  let pageUrl = requestUrl + '&page=' + randomPage;  //eine URL, die sowohl die Basis-URL als auch den Seitenparameter enthält -> später verwendet, um die Bilder von Unsplash abzurufen
   console.log(randomPage);
 
 

@@ -1,11 +1,14 @@
 body {
   background-color: rgb(244, 217, 127);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 
 .container {
   text-align: center;   /* Zentriert den Inhalt im Container */
   margin-top: 50px;     /* Setzt den oberen Randabstand des Containers auf 50 Pixel */
 }
+
 #memoryGame {
   display: flex;
   flex-direction: row;
