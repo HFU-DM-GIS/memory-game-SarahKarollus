@@ -1,30 +1,53 @@
-<!DOCTYPE html>   <!--Typ des Dokumentes-->
+<!DOCTYPE html> <!--Typ des Dokumentes-->
 <html>
-  <head>
-    <title>Memory Game</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />    <!-- bindet die CSS Datei ein -->
-    <script src="script.js" defer></script>                       <!-- bindet die JavaScript Datei ein -->
-  </head>
-  <body>
-    <div class="container">     <!-- Der "container" umschließt alle sichbaren inhalte der Website-->
-      <h1>Memory Game</h1>
 
-        <label for="card-count">Anzahl der Kartenpaare:</label>
-        <select id="card-count">
-          <option value="6">6</option>
-          <option value="8">8</option>
-          <option value="12">12</option>
-        </select>
-        <form>
-          <label for="fname">Thema Bilder:</label><br>
-          <input type="text" id="theme" name="theme"><br>
-          <input type="button" id="buttonSearch" value="Suchen"></button>
-        </form>
-    
+<head>
+  <title>Memory Game</title>
+  <link rel="stylesheet" type="text/css" href="style.css" /> <!-- bindet die CSS Datei ein -->
+  <script src="script.js" defer></script> <!-- bindet die JavaScript Datei ein -->
+</head>
 
-      <section id="memoryGame">
-  </section>
-      <button id="reset">Reset</button>  <!-- ein Button mit der id "reset" -->
+<body>
+  <div class="container"> <!-- Der "container" umschließt alle sichbaren inhalte der Website-->
+    <h1>Memory Game</h1>
+
+
+
+    <div id="popup">
+      <h1>Anleitung</h1>
+      <p>Das <strong>Ziel</strong> des Spiels ist es, Paare von Karten <strong>aufzudecken</strong>, die das
+        <strong>gleiche Bild </strong>zeigen.</p>
+      <p>Die Karten werden zu Beginn gemischt und verdeckt auf dem Spielfeld platziert. Der Spieler deckt eine Karte
+        auf, indem er darauf klickt. Danach deckt er eine zweite Karte auf.</p>
+      <p>Wenn die beiden aufgedeckten Karten das gleiche Bild haben, bleiben sie aufgedeckt und der Spieler erhält einen
+        Punkt. Wenn die beiden aufgedeckten Karten unterschiedliche Bilder haben, werden sie wieder verdeckt.</p>
+      <p>Das Spiel endet, wenn alle Paare gefunden wurden. <br>Viel Spaß beim Spielen!</p>
+
+      <div id="close" onclick="closePopup()">Start Spiel</div>
     </div>
-  </body>
+
+
+
+
+
+
+    <label for="card-count">Anzahl der Kartenpaare:</label>
+    <select id="card-count">
+      <option value="6">6</option>
+      <option value="8">8</option>
+      <option value="12">12</option>
+    </select>
+    <form>
+      <label for="fname">Thema Bilder:</label><br>
+      <input type="text" id="theme" name="theme"><br>
+      <input type="button" id="buttonSearch" value="Suchen"></button>
+    </form>
+
+
+    <section id="memoryGame">
+    </section>
+    <button id="reset">Reset</button> <!-- ein Button mit der id "reset" -->
+  </div>
+</body>
+
 </html>

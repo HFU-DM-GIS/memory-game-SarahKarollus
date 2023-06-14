@@ -5,8 +5,10 @@ body {
 
 
 .container {
-  text-align: center;   /* Zentriert den Inhalt im Container */
-  margin-top: 50px;     /* Setzt den oberen Randabstand des Containers auf 50 Pixel */
+  text-align: center;
+  /* Zentriert den Inhalt im Container */
+  margin-top: 50px;
+  /* Setzt den oberen Randabstand des Containers auf 50 Pixel */
 }
 
 #memoryGame {
@@ -14,44 +16,90 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  
+
 }
 
 
 .card {
   margin: 10px;
 }
+
 #card-count {
   margin-bottom: 40px;
 }
 
 .grid {
-  display: flex;            /* Flexbox zum Erstellen des Rasters */
-  flex-wrap: wrap;          /* Erlaubt einen Zeilenbruch, wenn die Zeile zu lang ist */
-  justify-content: center;  /* Zentriert den Inhalt horizontal im Raster */
+  display: flex;
+  /* Flexbox zum Erstellen des Rasters */
+  flex-wrap: wrap;
+  /* Erlaubt einen Zeilenbruch, wenn die Zeile zu lang ist */
+  justify-content: center;
+  /* Zentriert den Inhalt horizontal im Raster */
 }
 
-.img  {
-  width: 150px;                 /*  Breite der Karte  */
-  height: 150px;                /*  Höhe der Karte */
-  margin: 10px;                 /*  der Abstand zwischen den Karten */
-  background-color: #f2f2f2;  /* die Hintergrundfarbe der Karten */
-  border-radius: 10px;          /* Setzt die abgerundeten Ecken der Karten auf 10 Pixel */
-  cursor: pointer;              /* Ändert den Mauszeiger, wenn der Nutzer über die Karte bewegt */
-  display: flex;                /* Flexbox zum Zentrieren des Inhalts der Karte */
-  justify-content: center;      /* Zentriert den Inhalt horizontal in der Karte */
-  align-items: center;          /* Zentriert den Inhalt vertikal in der Karte */
-  font-size: 50px;              /*  Schriftgröße des Inhalts der Karte  */
+.img {
+  width: 150px;
+  /*  Breite der Karte  */
+  height: 150px;
+  /*  Höhe der Karte */
+  margin: 10px;
+  /*  der Abstand zwischen den Karten */
+  background-color: #f2f2f2;
+  /* die Hintergrundfarbe der Karten */
+  border-radius: 10px;
+  /* Setzt die abgerundeten Ecken der Karten auf 10 Pixel */
+  cursor: pointer;
+  /* Ändert den Mauszeiger, wenn der Nutzer über die Karte bewegt */
+  display: flex;
+  /* Flexbox zum Zentrieren des Inhalts der Karte */
+  justify-content: center;
+  /* Zentriert den Inhalt horizontal in der Karte */
+  align-items: center;
+  /* Zentriert den Inhalt vertikal in der Karte */
+  font-size: 50px;
+  /*  Schriftgröße des Inhalts der Karte  */
   order: 0;
 }
+
 #reset {
   margin-top: 40px;
 }
+
 .frontface {
-  display: none;        /* Versteckt den Inhalt der Karte */
+  display: none;
+  /* Versteckt den Inhalt der Karte */
+  cursor: pointer;
 }
 
 .flipped {
-  display: block;       /* Zeigt den Inhalt der Karte an, wenn sie umgedreht ist */
+  display: block;
+  /* Zeigt den Inhalt der Karte an, wenn sie umgedreht ist */
 }
- 
+
+/* Stil für das Pop-up-Fenster */
+#popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid black;
+  padding: 20px;
+  width: 400px;
+  max-width: 90%;
+  text-align: justify;
+  text-align-last: center;
+}
+
+/* Stil für den Schließen-Button */
+#close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Stil für die Absatz-Container */
+.paragraph-container {
+  margin-bottom: 10px;
+}

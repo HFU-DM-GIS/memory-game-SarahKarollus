@@ -14,36 +14,51 @@ let items = []; //leeres Array items wird erstellt. In diesem Array werden die a
 let itemsDouble = []; //leeres Array itemsDouble wird erstellt. In diesem Array werden die doppelten Bilder (weil Memory) für das aktuelle Spiel gespeichert.
 let search = "dog"; //Variable search wird mit dem anfänglichen Suchthema "dog" initialisiert. Dieses Suchthema wird verwendet, um Bilder von Unsplash abzurufen.
 let requestUrl =
-      'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
-      //Variable requestUrl wird erstellt, die die URL für die API-Anfrage an Unsplash enthält. Das Suchthema wird in die URL eingefügt.
+  'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
+//Variable requestUrl wird erstellt, die die URL für die API-Anfrage an Unsplash enthält. Das Suchthema wird in die URL eingefügt.
+
+window.onload = function () {
+  openPopup();
+};
+
+function openPopup() {
+  let popup = document.getElementById('popup');
+  popup.style.display = 'block';
+}
+
+function closePopup() {
+  var popup = document.getElementById('popup');
+  popup.style.display = 'none';
+}
+
 
 
 buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
 
 //Funktion changeSearch wird definiert. Diese Funktion wird aufgerufen, wenn der Suchbutton geklickt wird(weil EventListener) ->  liest den Wert aus dem Sucheingabefeld und aktualisiert das Suchthema und die requestUrl für die API-Anfrage.
-      function changeSearch() { //wichtig für die API -Anfrage
-        console.log(searchInput.value); //zeigt auf der Konsole das Thema, was gesucht wurde
-        search = searchInput.value; 
-        requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
-        allItems = []; //listen dann die ganzen Items, die in Frage kommen
-      changeNumberOfCards(); 
-      }
-     
-      
+function changeSearch() { //wichtig für die API -Anfrage
+  console.log("we search for the term: " + searchInput.value); //zeigt auf der Konsole das Thema, was gesucht wurde
+  search = searchInput.value;
+  requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
+  allItems = []; //listen dann die ganzen Items, die in Frage kommen
+  changeNumberOfCards();
+}
+
+
 //Funktion getAllItems wird definiert. Diese Funktion ruft Bilder von Unsplash ab und speichert sie im Array allItems.
 async function getAllItems() { //Funktion getAllItems wird definiert (verwendet den Asynchron-Modifikator async ) -> bedeutet, dass die Funktion asynchronen Code enthält und auf asynchrone Operationen (Netzwerkanfragen) zugreift
-  for(let i= 0; i<=12; i++) { //for-Schleife wird verwendet, um 12 Wiederholungen durchzuführen. Der Schleifenindex i wird von 0 bis 12 inkrementiert
-  let randomImage = await getNewImage(); // in jedem Schleifendurchlauf wird die Funktion getNewImage() aufgerufen und das Ergebnis in der Variablen randomImage gespeichert. Das Schlüsselwort await wird verwendet, um die asynchrone Funktion getNewImage() zu pausieren und auf das Ergebnis zu warten, bevor es fortgesetzt wird
-  allItems.push({name: "image" +i, image: randomImage}); //Objekt {name: "image" +i, image: randomImage} wird zum Array allItems hinzugefügt (Objekt enthält zwei Eigenschaften: name und image) Der Wert der name-Eigenschaft wird als "image" zusammen mit dem aktuellen Schleifenindex i festgelegt, um ein eindeutigen Namen für jedes Bild zu generieren. Der Wert der image-Eigenschaft ist das zufällig abgerufene Bild (randomImage)
-  // console.log(allItems);
+  for (let i = 0; i <= 12; i++) { //for-Schleife wird verwendet, um 12 Wiederholungen durchzuführen. Der Schleifenindex i wird von 0 bis 12 inkrementiert
+    let randomImage = await getNewImage(); // in jedem Schleifendurchlauf wird die Funktion getNewImage() aufgerufen und das Ergebnis in der Variablen randomImage gespeichert. Das Schlüsselwort await wird verwendet, um die asynchrone Funktion getNewImage() zu pausieren und auf das Ergebnis zu warten, bevor es fortgesetzt wird
+    allItems.push({ name: "image" + i, image: randomImage }); //Objekt {name: "image" +i, image: randomImage} wird zum Array allItems hinzugefügt (Objekt enthält zwei Eigenschaften: name und image) Der Wert der name-Eigenschaft wird als "image" zusammen mit dem aktuellen Schleifenindex i festgelegt, um ein eindeutigen Namen für jedes Bild zu generieren. Der Wert der image-Eigenschaft ist das zufällig abgerufene Bild (randomImage)
+    // console.log(allItems);
   }
 }
 //Funktion getNewImage wird definiert. Diese Funktion ruft ein zufälliges Bild von Unsplash basierend auf dem aktuellen Suchthema ab und gibt die URL des Bildes zurück
-async function getNewImage() { 
+async function getNewImage() {
   let randomNumber = Math.floor(Math.random() * 10); //10 Bilder von einer Seite werden gepickt
   let randomPage = Math.floor(Math.random() * 3); //3 Seiten stehen zur Verfügung (wichtig hier wenig zu haben, weils sonst zu lange lädt)
   let pageUrl = requestUrl + '&page=' + randomPage;  //eine URL, die sowohl die Basis-URL als auch den Seitenparameter enthält -> später verwendet, um die Bilder von Unsplash abzurufen
-  console.log(randomPage);
+  console.log("zufälliges Bild" + randomPage);
 
 
   return fetch(pageUrl)
@@ -52,7 +67,7 @@ async function getNewImage() {
       let allImages = data.results[randomNumber];
       return allImages.urls.regular;
     });
-   
+
 }
 
 
@@ -85,7 +100,7 @@ async function changeNumberOfCards() {
   while (memoryGame.firstChild) {
     memoryGame.removeChild(memoryGame.lastChild);
   }
-  console.log(items)
+  console.log("karteanzahl" + items)
   loadCards();
 
 }
@@ -93,7 +108,9 @@ async function changeNumberOfCards() {
 //Funktion loadCards wird definiert. Diese Funktion lädt die Karten in den Spielbereich (memoryGame) basierend auf den ausgewählten Bildern
 function loadCards() {
   itemsDouble = []; // Array erstellt, wo alles verdoppelt wird
+  console.log("Array mit verdoppelten items");
   console.log(itemsDouble);
+
   //double items
   for (let j = 0; j < 2; j++) { // Ablauf 2 Mal
     for (let y = 0; y < items.length; y++) { //Alle Elemente von items werden in ItemsDouble kopiert
@@ -135,15 +152,18 @@ function flipCard(imgFrontFace) { //Bild wird angeklickt -> Funktion flipCard wi
   cardCounter++; // Der Wert von "cardCounter" wird um eins erhöht -> "cardCounter" verfolgt+prüft ob es sich um die erste oder zweite Karte handelt 
   if (cardCounter == 1) { //Wenn "cardCounter" gleich 1 ist, wird der folgende Codeblock ausgeführt
     firstCard = imgFrontFace //speichert imgFrontface in die Variable 
+    console.log("erste Karte");
     console.log(firstCard);
 
   } else if (cardCounter == 2) { //Wenn "cardCounter" gleich 2 ist, wird der folgende Codeblock ausgeführt
     secondCard = imgFrontFace //speichert imgFrontFace in die 2. Variable
+    console.log("zweite Karte");
     console.log(secondCard);
 
   } else { //Wenn "cardCounter" weder 1 noch 2 ist, wird der folgende Codeblock ausgeführt -> das Spiel wird auf den Anfangszustand zurückgesetzt  + "cardCounter" auf 1 gesetzt und "secondCard" auf "null" gesetzt
     cardCounter = 1; // die 3. Karte basically ist wieder die erste, weil die beiden davor schon überprüft wurden 
     firstCard = imgFrontFace
+    console.log("erste Karte");
     console.log(firstCard);
 
     secondCard = null; // die zweite Karte von davor wird entfernt 
