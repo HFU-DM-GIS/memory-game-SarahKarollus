@@ -33,16 +33,22 @@ function closePopup() {
 
 
 
-buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
+buttonSearch.addEventListener("keypress", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
+
+if (changeSearch.key === 'Enter') {
+  // Hier kannst du den Code ausführen, der auf die Eingabetaste reagieren soll
+  console.log('Enter wurde gedrückt');
+}; 
 
 //Funktion changeSearch wird definiert. Diese Funktion wird aufgerufen, wenn der Suchbutton geklickt wird(weil EventListener) ->  liest den Wert aus dem Sucheingabefeld und aktualisiert das Suchthema und die requestUrl für die API-Anfrage.
 function changeSearch() { //wichtig für die API -Anfrage
+
   console.log("we search for the term: " + searchInput.value); //zeigt auf der Konsole das Thema, was gesucht wurde
   search = searchInput.value;
   requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
   allItems = []; //listen dann die ganzen Items, die in Frage kommen
   changeNumberOfCards();
-}
+};
 
 
 //Funktion getAllItems wird definiert. Diese Funktion ruft Bilder von Unsplash ab und speichert sie im Array allItems.
