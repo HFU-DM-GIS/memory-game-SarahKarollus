@@ -33,7 +33,7 @@ function closePopup() {
 
 
 
-buttonSearch.addEventListener("keypress", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
+buttonSearch.addEventListener('keypress', changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
 
 if (changeSearch.key === 'Enter') {
   function changeSearch() { //wichtig für die API -Anfrage
@@ -41,7 +41,7 @@ if (changeSearch.key === 'Enter') {
     console.log("we search for the term: " + searchInput.value); //zeigt auf der Konsole das Thema, was gesucht wurde
     search = searchInput.value;
     requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
-    allItems = []; //listen dann die ganzen Items, die in Frage kommen
+    allItems = []; //listen dann die ganzen Items, die in Frage kommen ----> vielleicht kann man hier ändern, damit nicht doppeltes bild
     changeNumberOfCards();
   };
   console.log('Enter wurde gedrückt');
@@ -53,9 +53,10 @@ if (changeSearch.key === 'Enter') {
 //Funktion getAllItems wird definiert. Diese Funktion ruft Bilder von Unsplash ab und speichert sie im Array allItems.
 async function getAllItems() { //Funktion getAllItems wird definiert (verwendet den Asynchron-Modifikator async ) -> bedeutet, dass die Funktion asynchronen Code enthält und auf asynchrone Operationen (Netzwerkanfragen) zugreift
   for (let i = 0; i <= 12; i++) { //for-Schleife wird verwendet, um 12 Wiederholungen durchzuführen. Der Schleifenindex i wird von 0 bis 12 inkrementiert
-    let randomImage = await getNewImage(); // in jedem Schleifendurchlauf wird die Funktion getNewImage() aufgerufen und das Ergebnis in der Variablen randomImage gespeichert. Das Schlüsselwort await wird verwendet, um die asynchrone Funktion getNewImage() zu pausieren und auf das Ergebnis zu warten, bevor es fortgesetzt wird
+    //----> vielleicht kann man hier ändern, damit nicht doppeltes bild auftritt
+    let randomImage = await getNewImage(); // in jedem Schleifendurchlauf wird die Funktion getNewImage() aufgerufen und das Ergebnis in der Variablen randomImage gespeichert. Das Schlüsselwort await wird verwendet, um die asynchrone Funktion getNewImage() zu pausieren und auf das Ergebnis zu warten, bevor es fortgesetzt wird 
     allItems.push({ name: "image" + i, image: randomImage }); //Objekt {name: "image" +i, image: randomImage} wird zum Array allItems hinzugefügt (Objekt enthält zwei Eigenschaften: name und image) Der Wert der name-Eigenschaft wird als "image" zusammen mit dem aktuellen Schleifenindex i festgelegt, um ein eindeutigen Namen für jedes Bild zu generieren. Der Wert der image-Eigenschaft ist das zufällig abgerufene Bild (randomImage)
-    // console.log(allItems);
+     console.log(allItems);
   }
 }
 //Funktion getNewImage wird definiert. Diese Funktion ruft ein zufälliges Bild von Unsplash basierend auf dem aktuellen Suchthema ab und gibt die URL des Bildes zurück
