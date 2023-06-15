@@ -24,11 +24,13 @@ window.onload = function () {
 function openPopup() {
   let popup = document.getElementById('popup');
   popup.style.display = 'block';
+  console.log("popup opened");
 }
 
 function closePopup() {
   let popup = document.getElementById('popup');
   popup.style.display = 'none';
+  console.log("popup closed");
 }
 
 
