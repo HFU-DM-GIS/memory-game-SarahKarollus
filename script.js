@@ -2,8 +2,10 @@ const cards = document.querySelectorAll(".card");  // Selektiert alle Elemente m
 const resetButton = document.querySelector("#reset"); // Selektiert das Element mit der ID "reset" und speichert sie in der Variable "resetButton"
 const cardCountSelect = document.getElementById("card-count"); // Selektiert das Dropdown-Menü und speichert es in der Variable "cardCountSelect" -> ermöglicht dem Spieler, die Anzahl der Karten im Spiel auszuwählen.
 const memoryGame = document.getElementById("memoryGame"); // Selektiert den Container für die Karten mit der ID "memoryGame" und speichert in der Variable "memoryGame"
-const buttonSearch = document.getElementById("buttonSearch"); //Element mit der ID "buttonSearch" wird ausgewählt und in der Variable buttonSearch gespeichert (dies Element repräsentiert den Suchbutton für die Bilder von Unsplash)
-// const keypress = documet.get
+//const buttonSearch = document.getElementById("buttonSearch"); //Element mit der ID "buttonSearch" wird ausgewählt und in der Variable buttonSearch gespeichert (dies Element repräsentiert den Suchbutton für die Bilder von Unsplash)
+
+const form = document.getElementById("theme-search");
+
 const searchInput = document.getElementById("theme"); // Eingabefeld mit der ID "theme" wird ausgewählt und in der Variable searchInput gespeichert. In diesem Eingabefeld kann der Spieler ein Suchthema für die Bilder eingeben.
 let numberOfCards = 6; //Variable numberOfCards wird mit dem Wert 6 initialisiert. Diese Variable speichert die aktuelle Anzahl der Karten AM ANFANG des Spiels.
 let firstCard; //Variable firstCard wird deklariert, um die erste umgedrehte Karte im Spiel zu speichern
@@ -34,7 +36,7 @@ function closePopup() {
   console.log("popup closed");
 }
 
-
+form.addEventListener("submit",changeSearch);
 
 buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
 
@@ -52,8 +54,8 @@ buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinz
 */
 
 //Funktion changeSearch wird definiert. Diese Funktion wird aufgerufen, wenn der Suchbutton geklickt wird(weil EventListener) ->  liest den Wert aus dem Sucheingabefeld und aktualisiert das Suchthema und die requestUrl für die API-Anfrage.
-function changeSearch() { //wichtig für die API -Anfrage
-
+function changeSearch(evt) { //wichtig für die API -Anfrage
+  evt.preventDefault();
   console.log("we search for the term: " + searchInput.value); //zeigt auf der Konsole das Thema, was gesucht wurde
   search = searchInput.value;
   requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
@@ -67,7 +69,7 @@ async function getAllItems() { //Funktion getAllItems wird definiert (verwendet 
     //----> vielleicht kann man hier ändern, damit nicht doppeltes bild auftritt
     let randomImage = await getNewImage(); // in jedem Schleifendurchlauf wird die Funktion getNewImage() aufgerufen und das Ergebnis in der Variablen randomImage gespeichert. Das Schlüsselwort await wird verwendet, um die asynchrone Funktion getNewImage() zu pausieren und auf das Ergebnis zu warten, bevor es fortgesetzt wird 
     allItems.push({ name: "image" + i, image: randomImage }); //Objekt {name: "image" +i, image: randomImage} wird zum Array allItems hinzugefügt (Objekt enthält zwei Eigenschaften: name und image) Der Wert der name-Eigenschaft wird als "image" zusammen mit dem aktuellen Schleifenindex i festgelegt, um ein eindeutigen Namen für jedes Bild zu generieren. Der Wert der image-Eigenschaft ist das zufällig abgerufene Bild (randomImage)
-     console.log(allItems);
+    // console.log(allItems);
   }
 }
 //Funktion getNewImage wird definiert. Diese Funktion ruft ein zufälliges Bild von Unsplash basierend auf dem aktuellen Suchthema ab und gibt die URL des Bildes zurück
@@ -75,15 +77,24 @@ async function getNewImage() {
   let randomNumber = Math.floor(Math.random() * 10); //10 Bilder von einer Seite werden gepickt
   let randomPage = Math.floor(Math.random() * 3); //3 Seiten stehen zur Verfügung (wichtig hier wenig zu haben, weils sonst zu lange lädt)
   let pageUrl = requestUrl + '&page=' + randomPage;  //eine URL, die sowohl die Basis-URL als auch den Seitenparameter enthält -> später verwendet, um die Bilder von Unsplash abzurufen
-  console.log("zufälliges Bild" + randomPage);
+  // console.log("zufälliges Bild" + randomPage);
 
 
   return fetch(pageUrl)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
+      if (data.total == 0) {
+        throw new Error("did not found any images");
+      }
       let allImages = data.results[randomNumber];
       return allImages.urls.regular;
-    });
+    }).catch((error) => {
+      console.log("error fetching images:" + error);
+      // search for dog as fallback
+      
+    }
+    );
 
 }
 
@@ -243,5 +254,6 @@ cards.forEach((card) => card.addEventListener("click", flipCard));
 
 // Fügt einen Event Listener für den "Reset" Button hinzu, der die Seite neu lädt
 resetButton.addEventListener("click", () => {
+  console.log("click on reset button");
   location.reload();
 });
