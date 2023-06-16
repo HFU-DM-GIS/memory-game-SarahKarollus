@@ -16,7 +16,8 @@
     <div id="popup">
       <h1>Anleitung</h1>
       <p>Das <strong>Ziel</strong> des Spiels ist es, Paare von Karten <strong>aufzudecken</strong>, die das
-        <strong>gleiche Bild </strong>zeigen.</p>
+        <strong>gleiche Bild </strong>zeigen.
+      </p>
       <p>Die Karten werden zu Beginn gemischt und verdeckt auf dem Spielfeld platziert. Der Spieler deckt eine Karte
         auf, indem er darauf klickt. Danach deckt er eine zweite Karte auf.</p>
       <p>Wenn die beiden aufgedeckten Karten das gleiche Bild haben, bleiben sie aufgedeckt und der Spieler erhält einen
@@ -27,10 +28,6 @@
     </div>
 
 
-
-
-
-
     <label for="card-count">Anzahl der Kartenpaare:</label>
     <select id="card-count">
       <option value="6">6</option>
@@ -38,14 +35,23 @@
       <option value="12">12</option>
     </select>
     <form id="theme-search">
-    <input type="text" id="theme">
-    <button type="button" id="buttonSearch">Suchen</button>
+      <input type="text" id="theme">
+      <button type="button" id="buttonSearch">Suchen</button>
     </form>
     <!-- <form>
       <label for="fname">Thema Bilder:</label><br>
       <input type="text" id="theme" name="theme"><br>
       <button type="button" id="buttonSearch" value="Suchen"></button> 
     </form> -->
+
+
+ 
+    <div id="timer"> 00:00:00 </div>   
+      <div id="controls">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+      </div>
+    </div>
 
 
     <section id="memoryGame">
