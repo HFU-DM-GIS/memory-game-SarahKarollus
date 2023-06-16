@@ -128,7 +128,7 @@ async function changeNumberOfCards() {
   while (memoryGame.firstChild) {
     memoryGame.removeChild(memoryGame.lastChild);
   }
-  console.log("karteanzahl" + items)
+  console.log("karteanzahl: " + numberOfCards+ " " +items)
   loadCards();
 
 }
@@ -171,6 +171,52 @@ function loadCards() {
 
   }
 }
+
+// Timer für highscore und local storage
+
+
+  let timerInterval;
+  let seconds = 0;
+  let minutes = 0;
+  let hours = 0;
+
+  function startTimer() {
+    document.getElementById('start').disabled = true;
+    document.getElementById('stop').disabled = false;
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+
+  function stopTimer() {
+    document.getElementById('start').disabled = false;
+    document.getElementById('stop').disabled = true;
+    clearInterval(timerInterval);
+  }
+
+
+  function updateTimer() {
+    seconds++;
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
+      if (minutes === 60) {
+        minutes = 0;
+        hours++;
+      }
+    }
+
+    var formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+    document.getElementById('timer').textContent = formattedTime;
+  }
+
+  function pad(value) {
+    return value < 10 ? '0' + value : value;
+  }
+
+  document.getElementById('start').addEventListener('click', startTimer);
+  document.getElementById('stop').addEventListener('click', stopTimer);
+ // Timer für highscore und local storage ende
+
+
 
 //Funktion flipCard wird definiert. Diese Funktion wird aufgerufen, wenn eine Karte angeklickt wird. Sie dreht die Karte um und überprüft, ob zwei umgedrehte Karten übereinstimmen oder nicht.
 function flipCard(imgFrontFace) { //Bild wird angeklickt -> Funktion flipCard wird aufgerufen -> imgFrontFace ist das angeklickte Bild und wird an Funktion weitergegeben

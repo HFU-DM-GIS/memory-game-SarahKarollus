@@ -63,6 +63,10 @@ body {
 
 #reset {
   margin-top: 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 .frontface {
@@ -102,4 +106,33 @@ body {
 /* Stil für die Absatz-Container */
 .paragraph-container {
   margin-bottom: 10px;
+}
+
+
+
+#timer {
+  font-size: 50px;
+  position: fixed;
+  bottom: 350px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 1; /* Lower z-index value */
+}
+
+#controls {
+  margin-top: 10px;
+  position: relative;
+  
+}
+
+#controls button {
+  font-size: 15px;
+  margin: 0px;
+  background-color: peru;
+  color: white;
+}
+
+#popup{
+  z-index: 2; /* Higher z-index value */
 }
