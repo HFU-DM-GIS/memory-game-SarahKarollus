@@ -111,19 +111,15 @@ body {
 
 
 #timer {
-  font-size: 50px;
-  position: fixed;
-  bottom: 350px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  z-index: 1; /* Lower z-index value */
+  font-size: 30px;
+  float: right;
+  padding: 20px;
 }
 
 #controls {
   margin-top: 10px;
   position: relative;
-  
+  float: right;
 }
 
 #controls button {
