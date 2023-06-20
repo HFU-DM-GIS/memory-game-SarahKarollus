@@ -20,46 +20,51 @@
       </p>
       <p>Das Spiel besteht aus <strong>6, 8 oder 12 Kartenpaaren</strong>, die verdeckt auf dem Spielfeld liegen.</p>
       <p>Um ein <strong>Thema</strong> zu wählen, einfach den Begriff in die suchzeile eingeben.</p>
-      <p>Du deckt zwei Karten auf, indem du auf sie klickt. Wenn die beiden Karten das gleiche Bild zeigen, bleiben sie aufgedeckt. Wenn die beiden Karten unterschiedliche Bilder haben, werden sie wieder verdeckt.</p>
+      <p>Du deckt zwei Karten auf, indem du auf sie klickt. Wenn die beiden Karten das gleiche Bild zeigen, bleiben sie
+        aufgedeckt. Wenn die beiden Karten unterschiedliche Bilder haben, werden sie wieder verdeckt.</p>
       <p>Das Spiel <strong>Endet</strong>, wenn du <strong>alle Paare gefunden</strong> wurden.</p>
       <p>Viel Spaß beim Spielen!</p>
 
       <div id="close" onclick="closePopup()">Schließen</div>
     </div>
 
-    <div id="timer"> 00:00:00 </div>   
-      <div id="controls">
-        <button id="start">Start</button>
-        <button id="stop">Stop</button>
-      </div>
+    <div id="timer"> 00:00:00 </div>
+    <div id="controls">
+      <button id="start">Start</button>
+      <button id="stop">Stop</button>
     </div>
+  </div>
 
-    <label for="card-count">Anzahl der Kartenpaare:</label>
-    <select id="card-count">
-      <option value="6">6</option>
-      <option value="8">8</option>
-      <option value="12">12</option>
-    </select>
-    <form id="theme-search">
-      <a>Thema Bilder:</a>
-      <input type="text" id="theme">
-      <button type="button" id="buttonSearch">Suchen</button>
-    </form>
-    <!-- <form>
+  <label for="card-count">Anzahl der Kartenpaare:</label>
+  <select id="card-count">
+    <option value="6">6</option>
+    <option value="8">8</option>
+    <option value="12">12</option>
+  </select>
+
+
+  <form id="theme-search">
+    <a>Thema Bilder:</a>
+    <input type="text" id="theme">
+    <button type="button" id="buttonSearch">Suchen</button>
+  </form>
+  <!-- <form>
       <label for="fname">Thema Bilder:</label><br>
       <input type="text" id="theme" name="theme"><br>
       <button type="button" id="buttonSearch" value="Suchen"></button> 
-    </form> -->
+  </form> -->
 
 
 
-    <section id="memoryGame">
-    </section>
+  <section id="memoryGame">
+  </section>
 
+  <div id="highscore">
+    <h2>Highscore</h2>
     <ul id="leaderboard"></ul>
     <button id="show-leaderboard">neuer score</button>
-
-    <button id="reset" type="button">Reset</button> <!-- ein Button mit der id "reset" -->
+  </div>
+  <button id="reset" type="button">Reset</button> <!-- ein Button mit der id "reset" -->
   </div>
 </body>
 

@@ -36,7 +36,22 @@ function closePopup() {
   console.log("popup closed");
 }
 
-form.addEventListener("submit",changeSearch);
+
+
+//leaderboardscore aus localstorage holen
+
+window.addEventListener("load", function () {   //sind bereits scores gespeichert? 
+  if (localStorage.getItem("leaderboardTimes")){  //wenn ja, dann werden sie aus dem localstorage geholt und in das leaderboard geschrieben
+    leaderboardTimes = JSON.parse(localStorage.getItem("leaderboardTimes"));  //JSON.parse wandelt die Daten in ein Array zurück
+    displayLeaderboard();
+  }
+});
+
+
+
+
+
+form.addEventListener("submit", changeSearch);
 
 buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
 
@@ -58,7 +73,7 @@ function changeSearch(evt) { //wichtig für die API -Anfrage
   evt.preventDefault();
   console.log("we search for the term: " + searchInput.value); //zeigt auf der Konsole das Thema, was gesucht wurde
   search = searchInput.value;
-  requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0'; 
+  requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
   allItems = []; //listen dann die ganzen Items, die in Frage kommen ----> vielleicht kann man hier ändern, damit nicht doppeltes bild
   changeNumberOfCards();
 };
@@ -107,7 +122,7 @@ async function getNewImage() {
     }).catch((error) => {
       console.log("error fetching images:" + error);
       // search for dog as fallback
-      
+
     }
     );
 
@@ -143,7 +158,7 @@ async function changeNumberOfCards() {
   while (memoryGame.firstChild) {
     memoryGame.removeChild(memoryGame.lastChild);
   }
-  console.log("karteanzahl: " + numberOfCards+ " " +items)
+  console.log("karteanzahl: " + numberOfCards + " " + items)
   loadCards();
 
 }
@@ -187,79 +202,81 @@ function loadCards() {
   }
 }
 
-// Timer für highscore und local storage
+// Timer für highscore wird definiert
 
 
-  let timerInterval;
-  let seconds = 0;
-  let minutes = 0;
-  let hours = 0;
-  let leaderboardTimes = [];
+let timerInterval;
+let seconds = 0;
+let minutes = 0;
+let hours = 0;
+let leaderboardTimes = [];
 
-  function startTimer() {
-    document.getElementById('start').disabled = true;
-    document.getElementById('stop').disabled = false;
-    timerInterval = setInterval(updateTimer, 1000);
-    console.log("start Timer");
-  }
+function startTimer() {
+  document.getElementById('start').disabled = true;
+  document.getElementById('stop').disabled = false;
+  timerInterval = setInterval(updateTimer, 1000);
+  console.log("start Timer");
+}
 
-  function stopTimer() {
-    document.getElementById('start').disabled = false;
-    document.getElementById('stop').disabled = true;
-    clearInterval(timerInterval);
-    clearInterval(timerInterval);
-
-    let formattedTime = document.getElementById('timer').textContent;
-    leaderboardTimes.push(formattedTime);
-   
-    console.log("stop Timer");
-    console.log("Zeit: " + formattedTime);
-    
-  }
-
-
-  function updateTimer() {
-    seconds++;
-    if (seconds === 60) {
-      seconds = 0;
-      minutes++;
-      if (minutes === 60) {
-        minutes = 0;
-        hours++;
-      }
-    }
-
-    let formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
-    document.getElementById('timer').textContent = formattedTime;
-  }
-
-  function pad(value) {
-    return value < 10 ? '0' + value : value;
-  }
-
-  document.getElementById('start').addEventListener('click', startTimer);
-  document.getElementById('stop').addEventListener('click', stopTimer);
-
+function stopTimer() {
+  document.getElementById('start').disabled = false;
+  document.getElementById('stop').disabled = true;
   clearInterval(timerInterval);
+  clearInterval(timerInterval);
+
   let formattedTime = document.getElementById('timer').textContent;
   leaderboardTimes.push(formattedTime);
+
+  console.log("stop Timer");
   console.log("Zeit: " + formattedTime);
 
-  function displayLeaderboard() {
-    let leaderboardElement = document.getElementById('leaderboard');
-  
-    // Leere das Leaderboard, um es zu aktualisieren
-    leaderboardElement.innerHTML = '';
-  
-    // Durchlaufe die gespeicherten Zeiten und füge sie zum Leaderboard hinzu
-    for (let i = 0; i < leaderboardTimes.length; i++) {
-      let timeEntry = document.createElement('li');
-      timeEntry.textContent = leaderboardTimes[i];
-      leaderboardElement.appendChild(timeEntry);
+  localStorage.setItem("leaderboardTimes", JSON.stringify(leaderboardTimes));   //Zeit wird in local storage gespeichert. JSON.stringify wandelt das array in einen string um, damit es im local storage gespeichert werden kann.
+  console.log("leaderboardTimes: " + leaderboardTimes);
+}
+
+
+function updateTimer() {
+  seconds++;
+  if (seconds === 60) {
+    seconds = 0;
+    minutes++;
+    if (minutes === 60) {
+      minutes = 0;
+      hours++;
     }
   }
-  document.getElementById('show-leaderboard').addEventListener('click', displayLeaderboard);
- // Timer für highscore und local storage ende
+
+  let formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+  document.getElementById('timer').textContent = formattedTime;
+}
+
+function pad(value) {
+  return value < 10 ? '0' + value : value;
+}
+
+document.getElementById('start').addEventListener('click', startTimer);
+document.getElementById('stop').addEventListener('click', stopTimer);
+
+clearInterval(timerInterval);
+let formattedTime = document.getElementById('timer').textContent;
+leaderboardTimes.push(formattedTime);
+console.log("Zeit: " + formattedTime);
+
+function displayLeaderboard() {
+  let leaderboardElement = document.getElementById('leaderboard');
+
+  // Leere das Leaderboard, um es zu aktualisieren
+  leaderboardElement.innerHTML = '';
+
+  // Durchlaufe die gespeicherten Zeiten und füge sie zum Leaderboard hinzu
+  for (let i = 0; i < leaderboardTimes.length; i++) {
+    let timeEntry = document.createElement('li');
+    timeEntry.textContent = leaderboardTimes[i];
+    leaderboardElement.appendChild(timeEntry);
+  }
+}
+document.getElementById('show-leaderboard').addEventListener('click', displayLeaderboard);
+// Timer für highscore ende
 
 
 
@@ -348,3 +365,5 @@ resetButton.addEventListener("click", () => {
   console.log("click on reset button");
   location.reload();
 });
+
+

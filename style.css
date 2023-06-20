@@ -96,7 +96,7 @@ body {
 }
 
 /* Stil für den Schließen-Button */
-#close{
+#close {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -108,7 +108,7 @@ body {
   margin-bottom: 10px;
 }
 
-#buttonSearch{
+#buttonSearch {
   cursor: pointer;
 }
 
@@ -117,12 +117,15 @@ body {
   float: right;
   padding: 20px;
 }
-#start{
+
+#start {
   cursor: pointer;
 }
-#stop{
+
+#stop {
   cursor: pointer;
-} 
+}
+
 #controls {
   margin-top: 10px;
   position: relative;
@@ -131,16 +134,25 @@ body {
 
 #controls button {
   font-size: 15px;
-  margin: 0px;
+  margin: 5px;
   background-color: peru;
   color: white;
 }
 
-#popup{
-  z-index: 2; /* Higher z-index value */
+#popup {
+  z-index: 2;
+  /* Higher z-index value */
+}
+
+#highscore {
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+ 
 }
 
 #show-leaderboard {
- position: relative;
- cursor: pointer;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
 }
