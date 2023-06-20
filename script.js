@@ -194,17 +194,27 @@ function loadCards() {
   let seconds = 0;
   let minutes = 0;
   let hours = 0;
+  let leaderboardTimes = [];
 
   function startTimer() {
     document.getElementById('start').disabled = true;
     document.getElementById('stop').disabled = false;
     timerInterval = setInterval(updateTimer, 1000);
+    console.log("start Timer");
   }
 
   function stopTimer() {
     document.getElementById('start').disabled = false;
     document.getElementById('stop').disabled = true;
     clearInterval(timerInterval);
+    clearInterval(timerInterval);
+
+    let formattedTime = document.getElementById('timer').textContent;
+    leaderboardTimes.push(formattedTime);
+   
+    console.log("stop Timer");
+    console.log("Zeit: " + formattedTime);
+    
   }
 
 
@@ -219,7 +229,7 @@ function loadCards() {
       }
     }
 
-    var formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+    let formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
     document.getElementById('timer').textContent = formattedTime;
   }
 
@@ -229,6 +239,26 @@ function loadCards() {
 
   document.getElementById('start').addEventListener('click', startTimer);
   document.getElementById('stop').addEventListener('click', stopTimer);
+
+  clearInterval(timerInterval);
+  let formattedTime = document.getElementById('timer').textContent;
+  leaderboardTimes.push(formattedTime);
+  console.log("Zeit: " + formattedTime);
+
+  function displayLeaderboard() {
+    let leaderboardElement = document.getElementById('leaderboard');
+  
+    // Leere das Leaderboard, um es zu aktualisieren
+    leaderboardElement.innerHTML = '';
+  
+    // Durchlaufe die gespeicherten Zeiten und füge sie zum Leaderboard hinzu
+    for (let i = 0; i < leaderboardTimes.length; i++) {
+      let timeEntry = document.createElement('li');
+      timeEntry.textContent = leaderboardTimes[i];
+      leaderboardElement.appendChild(timeEntry);
+    }
+  }
+  document.getElementById('show-leaderboard').addEventListener('click', displayLeaderboard);
  // Timer für highscore und local storage ende
 
 
