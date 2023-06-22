@@ -164,7 +164,7 @@ body {
   position: relative;
   text-align: center;
   cursor: pointer;
- 
+  text-decoration: none;
 }
 
 #show-leaderboard {
