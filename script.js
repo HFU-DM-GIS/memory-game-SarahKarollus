@@ -225,7 +225,7 @@ function stopTimer() {
   document.getElementById('start').disabled = false;
   document.getElementById('stop').disabled = true;
   clearInterval(timerInterval);
-  clearInterval(timerInterval);
+  
 
   let formattedTime = document.getElementById('timer').textContent;
   leaderboardTimes.push(formattedTime);
@@ -254,7 +254,13 @@ function updateTimer() {
 }
 
 function pad(value) {
-  return value < 10 ? '0' + value : value;
+  if (value<10){
+    return "0" + value;
+  }
+  else{
+    return value;
+  }
+  // advanced: return value < 10 ? '0' + value : value;
 }
 
 document.getElementById('start').addEventListener('click', startTimer);

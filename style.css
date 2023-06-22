@@ -11,6 +11,9 @@ body {
   /* Setzt den oberen Randabstand des Containers auf 50 Pixel */
 }
 
+
+/* Die karten */
+
 #memoryGame {
   display: flex;
   flex-direction: row;
@@ -80,7 +83,11 @@ body {
   /* Zeigt den Inhalt der Karte an, wenn sie umgedreht ist */
 }
 
+
+
+
 /* Stil für das Pop-up-Fenster */
+
 #popup {
   position: fixed;
   top: 50%;
@@ -93,7 +100,9 @@ body {
   max-width: 90%;
   text-align: justify;
   text-align-last: center;
+  z-index: 2;
 }
+
 
 /* Stil für den Schließen-Button */
 #close {
@@ -108,10 +117,19 @@ body {
   margin-bottom: 10px;
 }
 
+
+
+/* Stil für die Buttons */
+
 #buttonSearch {
   cursor: pointer;
 }
 
+
+
+
+
+/* Stil für die Timer */
 #timer {
   font-size: 30px;
   float: right;
@@ -139,12 +157,10 @@ body {
   color: white;
 }
 
-#popup {
-  z-index: 2;
-  /* Higher z-index value */
-}
 
-#highscore {
+/* Stil für die Highscore-Liste */
+
+#highscore { 
   position: relative;
   text-align: center;
   cursor: pointer;
