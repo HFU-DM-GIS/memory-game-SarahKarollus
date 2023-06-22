@@ -215,20 +215,20 @@ let hours = 0;
 let leaderboardTimes = [];
 
 function startTimer() {
-  document.getElementById('start').disabled = true;
-  document.getElementById('stop').disabled = false;
-  timerInterval = setInterval(updateTimer, 1000);
+  document.getElementById('start').disabled = true; //start button wird disabled
+  document.getElementById('stop').disabled = false; //stop button wird enabled
+  timerInterval = setInterval(updateTimer, 1000); //setInterval wird aufgerufen mit der function updateTimer -> wird alle 1000ms aufgerufen
   console.log("start Timer");
 }
 
 function stopTimer() {
-  document.getElementById('start').disabled = false;
-  document.getElementById('stop').disabled = true;
-  clearInterval(timerInterval);
+  document.getElementById('start').disabled = false; //start button wird enabled
+  document.getElementById('stop').disabled = true; //stop button wird disabled
+  clearInterval(timerInterval); //setInterval wird gestoppt
   
 
-  let formattedTime = document.getElementById('timer').textContent;
-  leaderboardTimes.push(formattedTime);
+  let formattedTime = document.getElementById('timer').textContent; //Zeit wird aus dem HTML Element mit der ID timer geholt
+  leaderboardTimes.push(formattedTime); //Zeit wird in das array leaderboardTimes gepusht
 
   console.log("stop Timer");
   console.log("Zeit: " + formattedTime);
@@ -249,42 +249,42 @@ function updateTimer() {
     }
   }
 
-  let formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
-  document.getElementById('timer').textContent = formattedTime;
+  let formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds); //Funktion pad wird aufgerufen um die Zeit richtig darzustellen 
+  document.getElementById('timer').textContent = formattedTime; //Zeit wird in das HTML Element mit der ID timer geschrieben
 }
 
-function pad(value) {
-  if (value<10){
-    return "0" + value;
+function pad(value) { //Funktion um die Zeit richtig darzustellen   
+  if (value<10){  
+    return "0" + value; //Wenn die Zeit kleiner als 10 ist, wird eine 0 vor die Zeit gesetzt für die ansicht 0*:0*:0*
   }
   else{
-    return value;
+    return value; //Wenn die Zeit größer als 10 ist, wird die Zeit normal angezeigt
   }
   // advanced: return value < 10 ? '0' + value : value;
 }
 
-document.getElementById('start').addEventListener('click', startTimer);
-document.getElementById('stop').addEventListener('click', stopTimer);
+document.getElementById('start').addEventListener('click', startTimer); 
+document.getElementById('stop').addEventListener('click', stopTimer); 
 
-clearInterval(timerInterval);
-let formattedTime = document.getElementById('timer').textContent;
-leaderboardTimes.push(formattedTime);
-console.log("Zeit: " + formattedTime);
+clearInterval(timerInterval); //Timer wird zurückgesetzt
+let formattedTime = document.getElementById('timer').textContent; //Die Zeit wird in das HTML Element mit der ID timer geschrieben
+leaderboardTimes.push(formattedTime);  //Die Zeit wird in das Array leaderboardTimes geschrieben
+console.log("Zeit: " + formattedTime);  
 
-function displayLeaderboard() {
-  let leaderboardElement = document.getElementById('leaderboard');
+function displayLeaderboard() { 
+  let leaderboardElement = document.getElementById('leaderboard'); 
 
-  // Leere das Leaderboard, um es zu aktualisieren
-  leaderboardElement.innerHTML = '';
+  // das Leaderboard wird geleert, um es neu zu befüllen
+  leaderboardElement.innerHTML = ''; 
 
   // Durchlaufe die gespeicherten Zeiten und füge sie zum Leaderboard hinzu
-  for (let i = 0; i < leaderboardTimes.length; i++) {
-    let timeEntry = document.createElement('li');
-    timeEntry.textContent = leaderboardTimes[i];
-    leaderboardElement.appendChild(timeEntry);
+  for (let i = 0; i < leaderboardTimes.length; i++) { // i wird um 1 erhöht, bis es gleich der länge des Arrays ist
+    let timeEntry = document.createElement('li'); //li Element wird erstellt
+    timeEntry.textContent = leaderboardTimes[i]; //Zeit wird in das li Element geschrieben
+    leaderboardElement.appendChild(timeEntry); //li Element wird an das ul Element angehängt
   }
 }
-document.getElementById('show-leaderboard').addEventListener('click', displayLeaderboard);
+document.getElementById('show-leaderboard').addEventListener('click', displayLeaderboard); //Funktion displayLeaderboard wird aufgerufen wenn der Button mit der ID show-leaderboard angeklickt wird
 // Timer für highscore ende
 
 
