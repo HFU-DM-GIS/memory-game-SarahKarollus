@@ -20,19 +20,19 @@ let requestUrl =
   'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
 //Variable requestUrl wird erstellt, die die URL für die API-Anfrage an Unsplash enthält. Das Suchthema wird in die URL eingefügt.
 
-window.onload = function () {
-  openPopup();
+window.onload = function () { //wird ausgeführt, wenn die Seite geladen ist
+  openPopup(); //öffnet das Popup
 };
 
-function openPopup() {
-  let popup = document.getElementById('popup');
-  popup.style.display = 'block';
-  console.log("popup opened");
+function openPopup() { //öffnet das Popup
+  let popup = document.getElementById('popup'); //Element mit der ID "popup" wird ausgewählt und in der Variable popup gespeichert
+  popup.style.display = 'block'; //das Popup wird angezeigt
+  console.log("popup opened"); 
 }
 
-function closePopup() {
-  let popup = document.getElementById('popup');
-  popup.style.display = 'none';
+function closePopup() { //schließt das Popup
+  let popup = document.getElementById('popup'); //Element mit der ID "popup" wird ausgewählt und in der Variable popup gespeichert
+  popup.style.display = 'none'; //das Popup wird ausgeblendet
   console.log("popup closed");
 }
 
@@ -51,7 +51,7 @@ window.addEventListener("load", function () {   //sind bereits scores gespeicher
 
 
 
-form.addEventListener("submit", changeSearch);
+form.addEventListener("submit", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft
 
 buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
 
@@ -68,42 +68,45 @@ buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinz
 }; 
 */
 
+
 //Funktion changeSearch wird definiert. Diese Funktion wird aufgerufen, wenn der Suchbutton geklickt wird(weil EventListener) ->  liest den Wert aus dem Sucheingabefeld und aktualisiert das Suchthema und die requestUrl für die API-Anfrage.
 function changeSearch(evt) { //wichtig für die API -Anfrage
-  evt.preventDefault();
+  evt.preventDefault(); //verhindert, dass die Seite neu geladen wird, wenn der Suchbutton geklickt wird
   console.log("we search for the term: " + searchInput.value); //zeigt auf der Konsole das Thema, was gesucht wurde
-  search = searchInput.value;
+  search = searchInput.value; //Suchthema wird aktualisiert
   requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
   allItems = []; //listen dann die ganzen Items, die in Frage kommen ----> vielleicht kann man hier ändern, damit nicht doppeltes bild
-  changeNumberOfCards();
+  changeNumberOfCards(); //Funktion changeNumberOfCards wird aufgerufen
 };
 
+
+
 //Funktion getAllItems wird definiert. Diese Funktion ruft Bilder von Unsplash ab und speichert sie im Array allItems.
-async function getAllItems() {
-  for (let i = 0; i <= 12; i++) {
-    let randomImage = await getNewImage();
+async function getAllItems() { //async wird verwendet, um asynchrone Funktionen zu definieren. Async-Funktionen sind Funktionen, die immer einen Promise zurückgeben. 
+  for (let i = 0; i <= 12; i++) { //Schleife wird 12 mal durchlaufen
+    let randomImage = await getNewImage(); //Funktion getNewImage wird aufgerufen und das Ergebnis wird in der Variable randomImage gespeichert
 
     // Überprüfung, ob das randomImage bereits im allItems-Array vorhanden ist
-    let foundDuplicate = false;
-    for (let y = 0; y < allItems.length; y++) {
-      if (allItems[y] && randomImage === allItems[y].image) {
-        console.log("Gefundenes Bild " + randomImage + " existiert bereits als " + allItems[y].image);
-        foundDuplicate = true;
+    let foundDuplicate = false; 
+    for (let y = 0; y < allItems.length; y++) { //Schleife wird so oft durchlaufen, wie das Array lang ist
+      if (allItems[y] && randomImage === allItems[y].image) { //Wenn das Bild bereits im Array vorhanden ist, wird die Schleife abgebrochen
+        console.log("Gefundenes Bild " + randomImage + " existiert bereits als " + allItems[y].image); 
+        foundDuplicate = true; 
         break; // Beendet die Schleife, da das Duplikat gefunden wurde
       }
     }
 
     // Wenn ein Duplikat gefunden wurde, wiederhole den Codeblock
-    if (foundDuplicate) {
+    if (foundDuplicate) { 
       i--; // Verringere den Index, um den aktuellen Durchlauf zu wiederholen
       continue; // Springe zur nächsten Iteration der äußeren Schleife
     }
 
-    allItems.push({ name: "image" + i, image: randomImage });
+    allItems.push({ name: "image" + i, image: randomImage }); //Wenn das Bild noch nicht im Array vorhanden ist, wird es in das Array gepusht
   }
 }
 //Funktion getNewImage wird definiert. Diese Funktion ruft ein zufälliges Bild von Unsplash basierend auf dem aktuellen Suchthema ab und gibt die URL des Bildes zurück
-async function getNewImage() {
+async function getNewImage() { 
   let randomNumber = Math.floor(Math.random() * 10); //10 Bilder von einer Seite werden gepickt
   let randomPage = Math.floor(Math.random() * 3); //3 Seiten stehen zur Verfügung (wichtig hier wenig zu haben, weils sonst zu lange lädt)
   let pageUrl = requestUrl + '&page=' + randomPage;  //eine URL, die sowohl die Basis-URL als auch den Seitenparameter enthält -> später verwendet, um die Bilder von Unsplash abzurufen
