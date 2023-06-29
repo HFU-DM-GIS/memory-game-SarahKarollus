@@ -94,6 +94,7 @@ async function getAllItems() { //async wird verwendet, um asynchrone Funktionen 
     allItems.push({ name: "image" + i, image: randomImage }); //Wenn das Bild noch nicht im Array vorhanden ist, wird es in das Array gepusht
   }
 }
+
 //Funktion getNewImage wird definiert. Diese Funktion ruft ein zufälliges Bild von Unsplash basierend auf dem aktuellen Suchthema ab und gibt die URL des Bildes zurück
 async function getNewImage() { 
   let randomNumber = Math.floor(Math.random() * 10); //10 Bilder von einer Seite werden gepickt
@@ -114,22 +115,15 @@ async function getNewImage() {
     }).catch((error) => {
       console.log("error fetching images:" + error);
       // search for dog as fallback
-    
-      // alert ("Zu diesem Thema konnten keine Bilder gefunden werden");
- 
+        
+      console.log("error fetching images:" + error);
+      alert("Zu diesem Thema konnten keine Bilder gefunden werden");
+      return Promise.reject(error); // Fehler weiterleiten
 
     }
     );
 
 }
-
-/*var condition = true;
-while (condition) {
-
-  if () {
-    condition = false;
-  }
-*/
 
 // Event Listener wird hinzugefügt, der auf Änderungen im Dropdown-Menü für die Anzahl der Karten reagiert. Wenn sich die Auswahl ändert, wird die Funktion changeNumberOfCards aufgerufen.
 cardCountSelect.addEventListener("change", (event) => {
