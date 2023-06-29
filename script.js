@@ -55,18 +55,7 @@ form.addEventListener("submit", changeSearch); //Event Listener wird hinzugefüg
 
 buttonSearch.addEventListener("click", changeSearch); //Event Listener wird hinzugefügt, der auf den Klick des Suchbuttons reagiert und die Funktion changeSearch aufruft 
 
-/* if (changeSearch.key === 'Enter') {
-  function changeSearch() { //wichtig für die API -Anfrage
 
-    console.log("we search for the term: " + searchInput.value); //zeigt auf der Konsole das Thema, was gesucht wurde
-    search = searchInput.value;
-    requestUrl = 'https://api.unsplash.com/search/photos?query=' + search + '&client_id=E8TYrZZgnie-WW-SL56ax-ov-lglR0flS5nzNSSg3b0';
-    allItems = []; //listen dann die ganzen Items, die in Frage kommen ----> vielleicht kann man hier ändern, damit nicht doppeltes bild
-    changeNumberOfCards();
-  };
-  console.log('Enter wurde gedrückt');
-}; 
-*/
 
 
 //Funktion changeSearch wird definiert. Diese Funktion wird aufgerufen, wenn der Suchbutton geklickt wird(weil EventListener) ->  liest den Wert aus dem Sucheingabefeld und aktualisiert das Suchthema und die requestUrl für die API-Anfrage.
@@ -90,7 +79,7 @@ async function getAllItems() { //async wird verwendet, um asynchrone Funktionen 
     let foundDuplicate = false; 
     for (let y = 0; y < allItems.length; y++) { //Schleife wird so oft durchlaufen, wie das Array lang ist
       if (allItems[y] && randomImage === allItems[y].image) { //Wenn das Bild bereits im Array vorhanden ist, wird die Schleife abgebrochen
-        console.log("Gefundenes Bild " + randomImage + " existiert bereits als " + allItems[y].image); 
+       // console.log("Gefundenes Bild " + randomImage + " existiert bereits als " + allItems[y].image); 
         foundDuplicate = true; 
         break; // Beendet die Schleife, da das Duplikat gefunden wurde
       }
@@ -116,7 +105,7 @@ async function getNewImage() {
   return fetch(pageUrl)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.total == 0) {
         throw new Error("did not found any images");
       }
@@ -125,13 +114,22 @@ async function getNewImage() {
     }).catch((error) => {
       console.log("error fetching images:" + error);
       // search for dog as fallback
+    
+      // alert ("Zu diesem Thema konnten keine Bilder gefunden werden");
+ 
 
     }
     );
 
 }
 
+/*var condition = true;
+while (condition) {
 
+  if () {
+    condition = false;
+  }
+*/
 
 // Event Listener wird hinzugefügt, der auf Änderungen im Dropdown-Menü für die Anzahl der Karten reagiert. Wenn sich die Auswahl ändert, wird die Funktion changeNumberOfCards aufgerufen.
 cardCountSelect.addEventListener("change", (event) => {
