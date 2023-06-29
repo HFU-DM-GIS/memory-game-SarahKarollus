@@ -89,11 +89,14 @@ async function getAllItems() { //async wird verwendet, um asynchrone Funktionen 
     if (foundDuplicate) { 
       i--; // Verringere den Index, um den aktuellen Durchlauf zu wiederholen
       continue; // Springe zur nächsten Iteration der äußeren Schleife
+    }else {
+      allItems.push({ name: "image" + i, image: randomImage }); //Wenn das Bild noch nicht im Array vorhanden ist, wird es in das Array gepusht
+
     }
 
-    allItems.push({ name: "image" + i, image: randomImage }); //Wenn das Bild noch nicht im Array vorhanden ist, wird es in das Array gepusht
   }
 }
+
 
 //Funktion getNewImage wird definiert. Diese Funktion ruft ein zufälliges Bild von Unsplash basierend auf dem aktuellen Suchthema ab und gibt die URL des Bildes zurück
 async function getNewImage() { 
